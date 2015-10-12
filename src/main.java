@@ -1,12 +1,12 @@
 
 public class main {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-}
+	
+public static void main(String[] args) {  
+	
+	Board testBoard = new Board();
+	System.out.print(testBoard.room[0].getName());
+	
+	Display testDisplay = new Display();
+	
+}  
+}  
