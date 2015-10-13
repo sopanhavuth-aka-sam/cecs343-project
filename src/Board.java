@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 
 
 /**
@@ -7,7 +9,7 @@
  */
 public class Board {
 	
-	public Room[] room = new Room[21]; //change back to private after testing
+	private Room[] room = new Room[21]; 
 	private int totalQP;
 	
 	public Board() {
@@ -34,29 +36,42 @@ public class Board {
 		int[] connectToRoom19 = {15};
 		int[] connectToRoom20 = {15};
 		
-		room[0] = new Room(connectToRoom0, "George Allen Field", 0, 0, 0);
-		room[1] = new Room(connectToRoom1, "Japanese Garden", 1, 0, 0);
-		room[2] = new Room(connectToRoom2, "Student Parking", 2, 0, 0);
-		room[3] = new Room(connectToRoom3, "The Pyramid", 3, 0, 0);
-		room[4] = new Room(connectToRoom4, "West Walkway", 4, 0, 0);
-		room[5] = new Room(connectToRoom5, "Recreation Center", 5, 0, 0);
-		room[6] = new Room(connectToRoom6, "Forbidden Parking", 6, 0, 0);
-		room[7] = new Room(connectToRoom7, "library", 7, 0, 0);
-		room[8] = new Room(connectToRoom8, "Union - LA 5", 8, 0, 0);
-		room[9] = new Room(connectToRoom9, "Brotman Hall", 9, 0, 0);
-		room[10] = new Room(connectToRoom10, "East Walkway", 10, 0, 0);
-		room[11] = new Room(connectToRoom11, "Computer Lab", 11, 0, 0);
-		room[12] = new Room(connectToRoom12, "North Hall", 12, 0, 0);
-		room[13] = new Room(connectToRoom13, "Room of Retirement", 13, 0, 0);
-		room[14] = new Room(connectToRoom14, "ECS 302", 14, 0, 0);
-		room[15] = new Room(connectToRoom15, "South Hall", 15, 0, 0);
-		room[16] = new Room(connectToRoom16, "Elevators", 16, 0, 0);
-		room[17] = new Room(connectToRoom17, "ECS 308", 17, 0, 0);
-		room[18] = new Room(connectToRoom18, "EAT Club", 18, 0, 0);
-		room[19] = new Room(connectToRoom19, "CECS Conference Room", 19, 0, 0);
-		room[20] = new Room(connectToRoom20, "Lactation Lounge", 20, 0, 0);
-		
+		room[0] = new Room(connectToRoom0, "George Allen Field", 0, 72, 148);
+		room[1] = new Room(connectToRoom1, "Japanese Garden", 1, 432, 40);
+		room[2] = new Room(connectToRoom2, "Student Parking", 2, 1023, 78);
+		room[3] = new Room(connectToRoom3, "The Pyramid", 3, 420, 274);
+		room[4] = new Room(connectToRoom4, "West Walkway", 4, 38, 663);
+		room[5] = new Room(connectToRoom5, "Recreation Center", 5, 440, 560);
+		room[6] = new Room(connectToRoom6, "Forbidden Parking", 6, 1116, 587);
+		room[7] = new Room(connectToRoom7, "library", 7, 20, 1707);
+		room[8] = new Room(connectToRoom8, "Union - LA 5", 8, 512, 1707);
+		room[9] = new Room(connectToRoom9, "Brotman Hall", 9, 1151, 1707);
+		room[10] = new Room(connectToRoom10, "East Walkway", 10, 1462, 989);
+		room[11] = new Room(connectToRoom11, "Computer Lab", 11, 170, 885);
+		room[12] = new Room(connectToRoom12, "North Hall", 12, 170, 1147);
+		room[13] = new Room(connectToRoom13, "Room of Retirement", 13, 170, 1349);
+		room[14] = new Room(connectToRoom14, "ECS 302", 14, 602, 885);
+		room[15] = new Room(connectToRoom15, "South Hall", 15, 843, 1147);
+		room[16] = new Room(connectToRoom16, "Elevators", 16, 605, 1349);
+		room[17] = new Room(connectToRoom17, "ECS 308", 17, 811, 1349);
+		room[18] = new Room(connectToRoom18, "EAT Club", 18, 1029, 885);
+		room[19] = new Room(connectToRoom19, "CECS Conference Room", 19, 1245, 885);
+		room[20] = new Room(connectToRoom20, "Lactation Lounge", 20, 1213, 1349);
 	}
 	
+	public int[] getConnectedRoom(int i) {
+		return room[i].getConnectedRoom();
+	}
 	
+	public String getName(int i) {
+		return room[i].getName();
+	}
+	
+	public int getLoc(int i) {
+		return room[i].getLoc();
+	}
+	
+	public Point getPos(int i) {
+		return room[i].getPos();
+	}
 }

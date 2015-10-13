@@ -1,27 +1,29 @@
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
 public class ImagePane extends JPanel {
-
-	private JLabel mapLabel;
+	
+	private Image backgroundImage;
 
 	public ImagePane() {
 		
-		mapLabel = new JLabel(new ImageIcon("CSULBMap3.png"));
-		mapLabel.setPreferredSize(new Dimension(1670,2000));
-		this.add(mapLabel);
+		this.setPreferredSize(new Dimension(1670,2000));
+		this.setLayout(null);
+		
+		try {
+			backgroundImage = ImageIO.read(new File("CSULBMap3.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void drawPlayer1() {
-		
-	}
-	
-	public void drawAI1() {
-		
-	}
-	
-	public void drawAI2() {
-		
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(backgroundImage, 0, 0, this);
 	}
 }
