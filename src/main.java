@@ -5,10 +5,9 @@ import javax.swing.JFrame;
 
 public class main {
 	
-public static void main(String[] args) {  
-
-	Controller gameControl = new Controller();
-
-}  
+	public static void main(String[] args) {  
+	
+		Controller gameControl = new Controller();
+	}  
 
 }  

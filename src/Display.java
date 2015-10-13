@@ -4,7 +4,7 @@ import java.awt.*;
 public class Display extends JFrame {
 	
 	//private ControlPane testPane = new ControlPane();
-	private ImagePane testImage = new ImagePane();
+	private ImagePane imageP = new ImagePane();
 	private InfoPane info = new InfoPane();
 	
 	public Display(){  
@@ -29,19 +29,14 @@ public class Display extends JFrame {
 		drawToken("John2", 72, 148, 2);
 		////////////////////////////
 		
-		JScrollPane scrollImage = new JScrollPane(testImage);
-		scrollImage.setPreferredSize(new Dimension(1000,500));
-		this.getContentPane().add(scrollImage);
-		
-		//adding controlPane
-		this.add(info);
-		
+		JScrollPane scrollImage = new JScrollPane(imageP);
 		this.setVisible(true);
 		scrollImage.setPreferredSize(new Dimension((int)(width/1.05),(int)(height/1.5)));
 		this.getContentPane().add(scrollImage, BorderLayout.NORTH);
-		//adding controlPane
-		//this.add(testPane);
 		this.add(info, BorderLayout.SOUTH);
+		
+		//adding controlPane
+		this.add(info);
 	}
 
 	public void drawToken(String name, int x, int y, int drawPos) {
@@ -49,7 +44,7 @@ public class Display extends JFrame {
 		JLabel player = new JLabel(name);
 		player.setFont(player.getFont().deriveFont(Font.BOLD, 30));
 		player.setForeground(Color.orange);
-		testImage.add(player);
+		imageP.add(player);
 		player.setLocation(x, y + (35 * drawPos));
 		player.setSize(100, 30);
 	}
