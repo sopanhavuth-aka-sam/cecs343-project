@@ -50,11 +50,13 @@ public class InfoPane extends JPanel {
 		table = new JTable(data, column);
 		table.setShowGrid(false);
 		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 100));
+		table.setPreferredSize(new Dimension(450, 150));
+		table.setRowMargin(-10);
 		panelEN.add(table, BorderLayout.WEST);
 		
 		areaEN = new JTextArea();
 		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
+		areaEN.append("");
 		areaEN.append("You are " + "Amanda" + "and you are in " + "ECS 308");
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 		
@@ -64,11 +66,9 @@ public class InfoPane extends JPanel {
 		panelEast.add(panelES, BorderLayout.SOUTH);
 		panelES.setLayout(new FlowLayout());
 		areaES = new JTextArea();
+		areaES.setText("Human player is " + "Amanda");
 		areaES.setEditable(false);
-		areaES.setLineWrap(true);
-		areaES.setWrapStyleWord(true);
-		areaES.setPreferredSize(new Dimension(800, 60));
-		
+		areaES.setPreferredSize(new Dimension(800,60));
 		JScrollPane scroll = new JScrollPane(areaES);
 		scroll.setPreferredSize(new Dimension(800,60));
 		panelES.add(scroll);
@@ -77,7 +77,7 @@ public class InfoPane extends JPanel {
 		JPanel panelCenter = new JPanel();
 		this.add(panelCenter, BorderLayout.CENTER);
 		panelCenter.setLayout(new BorderLayout());
-		
+
 		JPanel panelCF = new JPanel();
 		panelCenter.add(panelCF);
 		panelCF.setLayout(new FlowLayout());
@@ -88,7 +88,11 @@ public class InfoPane extends JPanel {
 		areaC.setLineWrap(true);
 		areaC.setWrapStyleWord(true);
 		areaC.setPreferredSize(new Dimension(200, 200));
-		panelCF.add(areaC, BorderLayout.WEST);
+		
+		JButton button = new JButton();
+		button.add(areaC);
+		button.setPreferredSize(new Dimension(200, 200));
+		panelCF.add(button, BorderLayout.WEST);
 
 		// West
 		JPanel panelWest = new JPanel();
@@ -124,26 +128,5 @@ public class InfoPane extends JPanel {
 
 		playCardBtn = new JButton("Play Card");
 		panelWNG.add(playCardBtn);
-
-		// Center-East
-		JPanel panelCE = new JPanel();
-		// panelCenter.add(panelCE, BorderLayout.EAST);
-		panelCE.add(new JLabel(new ImageIcon("")));
-
-		// Center-North
-		JPanel panelCN = new JPanel();
-		panelCenter.add(panelCN, BorderLayout.NORTH);
-
-		// Center-North-west
-		// JPanel panelCNW = new JPanel();
-
-		// panelCN.add(panelCNW, BorderLayout.WEST);
-		// panelCenter.add(panelCN, BorderLayout.NORTH);
-
-		// JPanel panelCC = new JPanel();
-
-		roomName = new String[] { "test1", "test2" }; // update string[] after
-														// very move;
-		connectedRoomList = new JList(roomName);
 	}
 }
