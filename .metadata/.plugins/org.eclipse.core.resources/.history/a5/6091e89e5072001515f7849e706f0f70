@@ -20,7 +20,6 @@ public class InfoPane extends JPanel {
 	}
 
 	public void view() {
-		Color white = new Color(255, 255, 255);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int) screenSize.getHeight();
 		height = height - (int) (height / 1.43);
@@ -36,27 +35,25 @@ public class InfoPane extends JPanel {
 		// East-North
 		JPanel panelEN = new JPanel();
 		panelEast.add(panelEN, BorderLayout.NORTH);
-		panelEN.setLayout(new BorderLayout());
-		panelEN.setBackground(white);
-		panelEN.setPreferredSize(new Dimension(800, 150));
-		
-		JTable table; 
-		String[] column = {" ", "Learning", "Craft", "Integrity", "Quality Points"};
-		Object[][] data = {{" ", "Learning", "Craft", "Integrity", "Quality Points"},
-				           {"Matt", "6", "6", "6", "0"},
-						   {"Amanda", "6", "6", "6", "0"}, 
-						   {"Habib", "6", "6", "6", "0"}
-						   };
-		table = new JTable(data, column);
-		table.setShowGrid(false);
-		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 50));
-		panelEN.add(table, BorderLayout.WEST);
-		
+		panelEN.setLayout(new FlowLayout());
 		areaEN = new JTextArea();
-		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
-		areaEN.append("You are " + "Amanda" + "and you are in " + "ECS 308");
-		panelEN.add(areaEN, BorderLayout.SOUTH);
+		areaEN.setText("\t" + "Learning\t" + "Craft\t" + "Integrity\t" + "Quality Points\n");
+		areaEN.append("Matt\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.append("Amanda\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.append("Habib\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.setEditable(false);
+		areaEN.setLineWrap(true);
+		areaEN.setWrapStyleWord(true);
+		areaEN.setPreferredSize(new Dimension(800, 150));
+		/*
+		JTable table; 
+		String[] column = {"", "Learning", "Craft", "Integrity", "Quality Points"};
+		Object[][] data = {{"Matt", "6", "6", "6", "0"},{"Amanda", "6", "6", "6", "0"}, 
+						   {"Habib", "6", "6", "6", "0"}};
+		table = new JTable(data, column);
+		areaEN.add(table);
+		*/
+		panelEN.add(areaEN);
 		
 		
 		// East-South
@@ -125,6 +122,36 @@ public class InfoPane extends JPanel {
 		playCardBtn = new JButton("Play Card");
 		panelWNG.add(playCardBtn);
 
+		/*
+		 * // East-North JPanel panelEN = new JPanel(); panelEast.add(panelEN,
+		 * BorderLayout.NORTH);    labelENCWN = new
+		 * JLabel("Cards in Deck: " + "3" + "/t/tDiscards out of play: " + "0");
+		 * labelENCWC = new JLabel("You are " + "Amanda" + "and you are in " +
+		 * "ECS 308");
+		 * 
+		 * areaEN = new JTextArea(); areaEN.setEditable(false);
+		 * areaEN.setLineWrap(true); areaEN.setWrapStyleWord(true);
+		 * areaEN.add(table, BorderLayout.NORTH);
+		 * 
+		 * 
+		 * // East-North-Center JPanel panelENC = new JPanel();
+		 * //panelEN.add(panelENC, BorderLayout.CENTER);
+		 * 
+		 * // East-North-Center-West JPanel panelENCW = new JPanel();
+		 * panelENC.add(panelENCW, BorderLayout.WEST); panelENCW.add(labelENCWN,
+		 * BorderLayout.NORTH); panelENCW.add(labelENCWC, BorderLayout.CENTER);
+		 * areaEN.add(panelENC, BorderLayout.CENTER); panelEN.add(areaEN,
+		 * BorderLayout.CENTER); //panelENCW.add(new JLabel("Cards in Deck: " +
+		 * "3" + "/t/tDiscards out of play: " + "0"), BorderLayout.NORTH);
+		 * //panelENCW.add(new JLabel("You are " + "Amanda" + "and you are in "
+		 * + "ECS 308"), BorderLayout.CENTER);
+		 * 
+		 * // East-South JPanel panelES = new JPanel(); areaES = new JTextArea(
+		 * "Human player" + "is" + "Amanda"); areaES.setEditable(false);
+		 * areaES.setLineWrap(true); areaES.setWrapStyleWord(true); JScrollPane
+		 * scroll = new JScrollPane(areaES); panelEast.add(panelES,
+		 * BorderLayout.SOUTH); panelES.add(scroll);
+		 */
 		// Center-East
 		JPanel panelCE = new JPanel();
 		// panelCenter.add(panelCE, BorderLayout.EAST);

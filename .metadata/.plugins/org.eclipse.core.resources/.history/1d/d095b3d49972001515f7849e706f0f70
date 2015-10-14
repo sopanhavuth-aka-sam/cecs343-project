@@ -56,6 +56,18 @@ public class InfoPane extends JPanel {
 		areaEN = new JTextArea();
 		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
 		areaEN.append("You are " + "Amanda" + "and you are in " + "ECS 308");
+		/*
+		areaEN.setText("\t" + "Learning\t" + "Craft\t" + "Integrity\t" + "Quality Points\n");
+		areaEN.append("Matt\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.append("Amanda\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.append("Habib\t" + "6\t" + "6\t" + "6\t" + "0\n");
+		areaEN.append("\n\nCards in deck: " + "34");
+		//areaEN.append("\n\n);
+		areaEN.setEditable(false);
+		areaEN.setLineWrap(true);
+		areaEN.setWrapStyleWord(true);
+		areaEN.setPreferredSize(new Dimension(800, 150));
+		*/
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 		
 		
