@@ -50,11 +50,11 @@ public class InfoPane extends JPanel {
 		table = new JTable(data, column);
 		table.setShowGrid(false);
 		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 100));
+		table.setPreferredSize(new Dimension(450, 50));
 		panelEN.add(table, BorderLayout.WEST);
 		
 		areaEN = new JTextArea();
-		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
+		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n\n");
 		areaEN.append("You are " + "Amanda" + "and you are in " + "ECS 308");
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 		

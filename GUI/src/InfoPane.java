@@ -50,7 +50,7 @@ public class InfoPane extends JPanel {
 		table = new JTable(data, column);
 		table.setShowGrid(false);
 		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 50));
+		table.setPreferredSize(new Dimension(450, 100));
 		panelEN.add(table, BorderLayout.WEST);
 		
 		areaEN = new JTextArea();
