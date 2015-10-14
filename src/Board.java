@@ -1,17 +1,25 @@
 import java.awt.Point;
 
-
-
 /**
+ * This class represent the board game. It construct and initialize all the 
+ * rooms in the board.
  * 
  * @author sam
  *
  */
 public class Board {
 	
+	/**
+	 * room:	array of rooms within the maps
+	 * totalQP:	sum of all player Quality Points. Once it reach a certain limits
+	 * 			, year of player go up (eg. freshmen to sophomore)
+	 */
 	private Room[] room = new Room[21]; 
 	private int totalQP;
 	
+	/**
+	 * constructor: create and initialize all the rooms
+	 */
 	public Board() {
 
 		int[] connectToRoom0 = {1, 3, 4, 5};
@@ -59,18 +67,43 @@ public class Board {
 		room[20] = new Room(connectToRoom20, "Lactation Lounge", 20, 1213, 1349);
 	}
 	
+	/**
+	 * get list of room that connected to i
+	 * 
+	 * @param i		number of the room to retrieve list of connected rooms from
+	 * @return		int array of connected room from the param
+	 */
 	public int[] getConnectedRoom(int i) {
 		return room[i].getConnectedRoom();
 	}
 	
+	/**
+	 * get name of the room i
+	 * 
+	 * @param i 	number of room to get the name from
+	 * @return		name string of the room
+	 */
 	public String getName(int i) {
 		return room[i].getName();
 	}
 	
+	/**
+	 * get location number of room i relative the whole map
+	 * 
+	 * @param i		number of room to get location from
+	 * @return		int location of the room
+	 */
 	public int getLoc(int i) {
 		return room[i].getLoc();
 	}
 	
+	/**
+	 * get pixel position of where the room i is. This is also where we print
+	 * token of players on the board
+	 * 
+	 * @param i		number of room to get pixel position from
+	 * @return		a Point object of where approximately the room is.
+	 */
 	public Point getPos(int i) {
 		return room[i].getPos();
 	}
