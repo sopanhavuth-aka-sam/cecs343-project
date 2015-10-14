@@ -5,11 +5,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
+/**
+ * 
+ * @author sam
+ *
+ */
 public class ImagePane extends JPanel {
 	
+	/**
+	 * 
+	 */
 	private Image backgroundImage;
 
+	/**
+	 * 
+	 */
 	public ImagePane() {
 		
 		this.setPreferredSize(new Dimension(1670,2000));
@@ -22,6 +32,9 @@ public class ImagePane extends JPanel {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(backgroundImage, 0, 0, this);

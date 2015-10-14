@@ -1,6 +1,7 @@
 import javax.swing.*;
-
-
+//////////////////////////////////////////////
+//NOT USED: consider removing this entirely
+/////////////////////////////////////////////
 public class ControlPane extends JPanel {
 	
 	private JButton drawCardBtn, moveBtn, playCardBtn;
