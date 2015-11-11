@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
-	<name>GUI</name>
-=======
-	<name>cecs343_project</name>
->>>>>>> cbee60bde4d8974d54ff5ec19cb3cbbd6d29c93f
+	<name>cecs343-project</name>
 	<comment></comment>
 	<projects>
 	</projects>

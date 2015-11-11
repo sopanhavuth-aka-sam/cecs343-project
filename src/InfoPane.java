@@ -14,8 +14,6 @@ public class InfoPane extends JPanel {
 	/**
 	 *
 	 */
-	public Player human, ai1, ai2;
-	public Board gameBoard;
 	
 	private JButton drawCardBtn, moveBtn, playCardBtn;
 	private JList connectedRoomList;
@@ -26,16 +24,11 @@ public class InfoPane extends JPanel {
 	private String selectedRoom;
 	private DefaultListModel roomNames;
 	
-	private static final int startLoc = 17;
 
 	/**
 	 *
 	 */
 	public InfoPane(){
-		gameBoard = new Board();
-		human = new Player("Jimmy", startLoc, 6, 6, 6 , 0, 1, 1);
-		ai1 = new Player("Mary", startLoc, 6, 6, 6 , 0, 1, 2);
-		ai2 = new Player("Tom", startLoc, 6, 6, 6 , 0, 1, 3);
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
 		//listSelectionListener
@@ -78,21 +71,21 @@ public class InfoPane extends JPanel {
 		
 		JTable table;
 		String[] column = {" ", "Learning", "Craft", "Integrity", "Quality Points"};
-		Object[][] data = {{" ", "Learning", "Craft", "Integrity", "Quality Points"},
-				           {human.getName(), human.getLearningPts(), human.getCraftPts(), human.getIntegrityPts(), human.getQP()},
-						   {ai1.getName(), ai1.getLearningPts(), ai1.getCraftPts(), ai1.getIntegrityPts(), ai1.getQP()},
-						   {ai2.getName(), ai2.getLearningPts(), ai2.getCraftPts(), ai2.getIntegrityPts(), ai2.getQP()}
-						   };
-		table = new JTable(data, column);
-		table.setShowGrid(false);
-		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 50));
-		table.setEnabled(false);
-		panelEN.add(table, BorderLayout.WEST);
+//		Object[][] data = {{" ", "Learning", "Craft", "Integrity", "Quality Points"},
+//				           {human.getName(), Integer.toString(human.getLearningPts()), Integer.toString(human.getCraftPts()), Integer.toString(human.getIntegrityPts(), human.getQP())},
+//						   {ai1.getName(), Integer.toString(ai1.getLearningPts()), Integer.toString(ai1.getCraftPts()), Integer.toString(ai1.getIntegrityPts()), Integer.toString(ai1.getQP())},
+//						   {ai2.getName(), Integer.toString(ai2.getLearningPts()), Integer.toString(ai2.getCraftPts()), Integer.toString(ai2.getIntegrityPts()), Integer.toString(ai2.getQP())}
+//						   };
+//		table = new JTable(data, column);
+//		table.setShowGrid(false);
+//		table.setIntercellSpacing(new Dimension(0,0));
+//		table.setPreferredSize(new Dimension(450, 50));
+//		table.setEnabled(false);
+//		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
 		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
-		areaEN.append("You are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		//areaEN.append("You are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
 
@@ -105,7 +98,7 @@ public class InfoPane extends JPanel {
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
 		areaES.setPreferredSize(new Dimension(800, 60));
-		areaES.setText("Human player is " + human.getName());
+		//areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
 		scroll.setPreferredSize(new Dimension(800,60));
 		panelES.add(scroll);
