@@ -1,9 +1,8 @@
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import java.awt.*;
-import java.awt.event.*;
 
 /**
  *
@@ -15,21 +14,40 @@ public class InfoPane extends JPanel {
 	/**
 	 *
 	 */
+	public Player human, ai1, ai2;
+	public Board gameBoard;
+	
 	private JButton drawCardBtn, moveBtn, playCardBtn;
 	private JList connectedRoomList;
 	private JPanel panel;
 	private JTextArea areaEN;
 	private JTextArea areaES;
-	private JTextArea areaCS;
-	private JLabel labelENCWN;
-	private JLabel labelENCWC;
+	private JTextArea areaWS;
 	private String selectedRoom;
 	private DefaultListModel roomNames;
+	
+	private static final int startLoc = 17;
 
 	/**
 	 *
 	 */
 	public InfoPane(){
+		gameBoard = new Board();
+		human = new Player("Jimmy", startLoc, 6, 6, 6 , 0, 1, 1);
+		ai1 = new Player("Mary", startLoc, 6, 6, 6 , 0, 1, 2);
+		ai2 = new Player("Tom", startLoc, 6, 6, 6 , 0, 1, 3);
+		roomNames = new DefaultListModel();
+		connectedRoomList = new JList(roomNames);
+		//listSelectionListener
+		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if(!e.getValueIsAdjusting()){
+					selectedRoom = String.valueOf(connectedRoomList.getSelectedValue());
+					//Debug: print selected row
+					System.out.println(selectedRoom);
+				}
+			}
+		});
 		view();
 	}
 
@@ -49,6 +67,7 @@ public class InfoPane extends JPanel {
 		JPanel panelEast = new JPanel();
 		this.add(panelEast, BorderLayout.EAST);
 		panelEast.setLayout(new BorderLayout());
+		panelEast.setPreferredSize(new Dimension(800, 150));
 
 		// East-North
 		JPanel panelEN = new JPanel();
@@ -56,23 +75,24 @@ public class InfoPane extends JPanel {
 		panelEN.setLayout(new BorderLayout());
 		panelEN.setBackground(white);
 		panelEN.setPreferredSize(new Dimension(800, 150));
-
+		
 		JTable table;
 		String[] column = {" ", "Learning", "Craft", "Integrity", "Quality Points"};
 		Object[][] data = {{" ", "Learning", "Craft", "Integrity", "Quality Points"},
-				           {"Matt", "6", "6", "6", "0"},
-						   {"Amanda", "6", "6", "6", "0"},
-						   {"Habib", "6", "6", "6", "0"}
+				           {human.getName(), human.getLearningPts(), human.getCraftPts(), human.getIntegrityPts(), human.getQP()},
+						   {ai1.getName(), ai1.getLearningPts(), ai1.getCraftPts(), ai1.getIntegrityPts(), ai1.getQP()},
+						   {ai2.getName(), ai2.getLearningPts(), ai2.getCraftPts(), ai2.getIntegrityPts(), ai2.getQP()}
 						   };
 		table = new JTable(data, column);
 		table.setShowGrid(false);
 		table.setIntercellSpacing(new Dimension(0,0));
-		table.setPreferredSize(new Dimension(450, 100));
+		table.setPreferredSize(new Dimension(450, 50));
+		table.setEnabled(false);
 		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
 		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
-		areaEN.append("You are " + "Amanda" + "and you are in " + "ECS 308");
+		areaEN.append("You are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
 
@@ -85,7 +105,7 @@ public class InfoPane extends JPanel {
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
 		areaES.setPreferredSize(new Dimension(800, 60));
-
+		areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
 		scroll.setPreferredSize(new Dimension(800,60));
 		panelES.add(scroll);
@@ -105,6 +125,10 @@ public class InfoPane extends JPanel {
 		areaC.setLineWrap(true);
 		areaC.setWrapStyleWord(true);
 		areaC.setPreferredSize(new Dimension(200, 200));
+		
+		JButton buttonC = new JButton();
+		areaC.add(buttonC);
+		
 		panelCF.add(areaC, BorderLayout.WEST);
 
 		// West
@@ -116,13 +140,10 @@ public class InfoPane extends JPanel {
 		JPanel panelWS = new JPanel();
 		panelWest.add(panelWS, BorderLayout.SOUTH);
 		panelWS.setLayout(new FlowLayout());
-		areaWS = new JTextArea();
-		areaWS.setEditable(false);
-		areaWS.setLineWrap(true);
-		areaWS.setWrapStyleWord(true);
-		areaWS.setPreferredSize(new Dimension(170, 120));
-		panelWS.add(areaWS);
-
+	
+		JScrollPane scrollWS = new JScrollPane(connectedRoomList);
+		scrollWS.setPreferredSize(new Dimension(170, 130));
+		panelWS.add(scrollWS);
 
 		// West-North
 		JPanel panelWN = new JPanel();
@@ -152,21 +173,6 @@ public class InfoPane extends JPanel {
 		panelCenter.add(panelCN, BorderLayout.NORTH);
 
 
-		roomNames = new DefaultListModel();
-		connectedRoomList = new JList(roomNames);
-
-		//temporary code for JList
-		panelCenter.add(connectedRoomList);
-		//listSelectionListener
-		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if(!e.getValueIsAdjusting()){
-					selectedRoom = String.valueOf(connectedRoomList.getSelectedValue());
-					//Debug: print selected row
-					System.out.println(selectedRoom);
-				}
-			}
-		});
 	}
 
 	/**
@@ -187,7 +193,7 @@ public class InfoPane extends JPanel {
 			roomNames.addElement(newList[i]);
 		}
 	}
-
+	
 	/**
 	 *
 	 * @param al

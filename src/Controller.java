@@ -12,21 +12,16 @@ public class Controller {
 	/**
 	 * 
 	 */
-	private Board gameBoard;
 	private Display gameDisplay;
-	private Player human, ai1, ai2;
+	private InfoPane infoPanel;
 	private static final int totalRoom = 21; 
-	private static final int startLoc = 17;
 
 	/**
 	 * 
 	 */
 	public Controller() {
-		gameBoard = new Board();
 		gameDisplay = new Display();
-		human = new Player("Jimmy", startLoc, 0, 0, 0 , 0, 1, 1);
-		ai1 = new Player("Mary", startLoc, 0, 0, 0 , 0, 1, 2);
-		ai2 = new Player("Tom", startLoc, 0, 0, 0 , 0, 1, 3);
+		infoPanel = new InfoPane();
 	
 		updateConnectedRoomList();
 		drawAllTokens();
@@ -37,9 +32,9 @@ public class Controller {
 	 * 
 	 */
 	public void drawAllTokens() {
-		gameDisplay.drawToken(human.getName(), gameBoard.getPos(human.getLoc()), human.getDrawPos());
-		gameDisplay.drawToken(ai1.getName(), gameBoard.getPos(ai1.getLoc()), ai1.getDrawPos());
-		gameDisplay.drawToken(ai2.getName(), gameBoard.getPos(ai2.getLoc()), ai2.getDrawPos());
+		gameDisplay.drawToken(infoPanel.human.getName(), infoPanel.gameBoard.getPos(infoPanel.human.getLoc()), infoPanel.human.getDrawPos());
+		gameDisplay.drawToken(infoPanel.ai1.getName(), infoPanel.gameBoard.getPos(infoPanel.ai1.getLoc()), infoPanel.ai1.getDrawPos());
+		gameDisplay.drawToken(infoPanel.ai2.getName(), infoPanel.gameBoard.getPos(infoPanel.ai2.getLoc()), infoPanel.ai2.getDrawPos());
 	}
 
 	/**
@@ -56,7 +51,7 @@ public class Controller {
 	 */
 	public int roomNameToLoc(String name) {
 		for(int i=0; i<totalRoom; i++) {
-			if(name.equals(gameBoard.getName(i))) {
+			if(name.equals(infoPanel.gameBoard.getName(i))) {
 				return i;
 			}
 		}
@@ -68,10 +63,10 @@ public class Controller {
 	 * 
 	 */
 	public void updateConnectedRoomList() {
-		int[] newRoomList = gameBoard.getConnectedRoom(human.getLoc());
+		int[] newRoomList = infoPanel.gameBoard.getConnectedRoom(infoPanel.human.getLoc());
 		String[] newRoomsStr = new String[newRoomList.length];
 		for(int i=0; i<newRoomList.length; i++) {
-			newRoomsStr[i] = gameBoard.getName(newRoomList[i]);
+			newRoomsStr[i] = infoPanel.gameBoard.getName(newRoomList[i]);
 		}
 		gameDisplay.updateRoomList(newRoomsStr);
 	}
@@ -87,7 +82,7 @@ public class Controller {
 				//get Human player's new room number.
 				int newLoc = roomNameToLoc(gameDisplay.getSelectedRoom());
 				//update human player's loc
-				human.setLoc(newLoc);
+				infoPanel.human.setLoc(newLoc);
 				//update and redraw map
 				clearAllTokens();
 				drawAllTokens();

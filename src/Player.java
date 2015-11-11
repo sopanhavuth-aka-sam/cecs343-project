@@ -22,8 +22,8 @@ public class Player {
 	 * @param year
 	 * @param drawPos
 	 */
-	public Player(String name, int location, int QP, int learning, int craft,
-			int integrity, int year, int drawPos) {
+	public Player(String name, int location, int learning, int craft,
+			int integrity, int QP, int year, int drawPos) {
 		this.name = name;
 		this.location = location;
 		this.QP = QP;

@@ -38,7 +38,6 @@ public class Display extends JFrame {
 		this.setVisible(true);
 		scrollImage.setPreferredSize(new Dimension((int)(width/1.05),(int)(height/1.5)));
 		this.getContentPane().add(scrollImage, BorderLayout.NORTH);
-		this.add(info, BorderLayout.SOUTH);
 		
 		//adding InfoPane
 		this.add(info);
