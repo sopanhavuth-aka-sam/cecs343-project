@@ -1,0 +1,51 @@
+00:44:35 **** Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:44:58 **** Incremental Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:45:07 **** Incremental Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:45:10 **** Incremental Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:50:33 **** Incremental Build of configuration Default for project cecs343-project ****
+make 
+make: *** No targets specified and no makefile found.  Stop.
+00:50:36 **** Incremental Build of configuration Default for project cecs343-project ****
+make 
+make: *** No targets specified and no makefile found.  Stop.
+00:52:29 **** Incremental Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:53:13 **** Clean-only build of configuration Default for project cecs343-project ****
+make clean 
+make: *** No rule to make target `clean'.  Stop.
+00:53:17 **** Build of configuration Default for project cecs343-project ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+00:55:07 **** Incremental Build of configuration Default for project cecs343-project ****
+make 
+make: *** No targets specified and no makefile found.  Stop.
+00:55:10 **** Incremental Build of configuration Default for project cecs343-project ****
+make 
+make: *** No targets specified and no makefile found.  Stop.
+01:10:55 **** Build of configuration Default for project src ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build of configuration Debug for project cecs343-project ****
+
+Nothing to build for project cecs343-project
+01:19:09 **** Build of configuration Default for project src ****
+make all 
+make: *** No rule to make target `all'.  Stop.
+
+**** Build of configuration Debug for project cecs343-project ****
+
+Nothing to build for project cecs343-project
+
+**** Build of configuration Debug for project cecs343-project ****
+
+Nothing to build for project cecs343-project
