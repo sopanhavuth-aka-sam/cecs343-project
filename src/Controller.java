@@ -15,6 +15,8 @@ public class Controller {
 	private Board gameBoard;
 	private Display gameDisplay;
 	private Player human, ai1, ai2;
+	private Deck deck;
+	private Hand playerHand;
 	private static final int TOTAL_ROOM = 21;
 
 	/**
@@ -26,11 +28,13 @@ public class Controller {
 		human = new Player("Jimmy", 17, 0, 0, 0 , 0, 1, 1);
 		ai1 = new Player("Mary", 17, 6, 6, 6 , 6, 1, 2);
 		ai2 = new Player("Tom", 17, 0, 0, 0 , 0, 1, 3);
+		//deck = new Deck();
+		playerHand = new Hand();
 
 		updateInfoPanel();
 		updateConnectedRoomList();
 		drawAllTokens();
-		addListener();
+		moveBtnListener();
 	}
 	
 	/**
@@ -101,8 +105,8 @@ public class Controller {
 	/**
 	 * 
 	 */
-	public void addListener() {
-		gameDisplay.addListener( new ActionListener(){
+	public void moveBtnListener() {
+		gameDisplay.moveBtnListener( new ActionListener(){
 
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,6 +119,16 @@ public class Controller {
 				drawAllTokens();
 				//update connected rooms list(JList)
 				updateConnectedRoomList();
+			}
+			
+		});
+	}
+	
+	public void drawCardBtnListener() {
+		gameDisplay.drawCardBtnListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				playerHand.addCard(deck.deal());
 			}
 			
 		});

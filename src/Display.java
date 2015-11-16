@@ -100,7 +100,11 @@ public class Display extends JFrame {
 	 * 
 	 * @param al
 	 */
-	public void addListener(ActionListener al) {
-		info.addListener(al);
+	public void moveBtnListener(ActionListener al) {
+		info.moveBtnListener(al);
+	}
+	
+	public void drawCardBtnListener(ActionListener al) {
+		info.drawCardBtnListener(al);
 	}
 }

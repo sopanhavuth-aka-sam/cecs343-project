@@ -223,10 +223,18 @@ public class InfoPane extends JPanel {
 	}
 	
 	/**
-	 *
+	 * add actionListener to "move button"
 	 * @param al
 	 */
-	public void addListener(ActionListener al) {
+	public void moveBtnListener(ActionListener al) {
 		moveBtn.addActionListener(al);
+	}
+	
+	/**
+	 * add actionListener to "draw button"
+	 * @param al
+	 */
+	public void drawCardBtnListener(ActionListener al) {
+		drawCardBtn.addActionListener(al);
 	}
 }
