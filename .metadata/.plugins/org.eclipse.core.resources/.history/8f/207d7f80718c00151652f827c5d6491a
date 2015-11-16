@@ -45,6 +45,7 @@ public class Deck{
 	private Card38 card38;
 	
 	public Deck(){
+		top = 39;
 		deck.add(card1 = new Card1());
 		/*deck.add(card3 = new Card1());
 		deck.add(card5 = new Card1());
@@ -83,9 +84,6 @@ public class Deck{
 		deck.add(card34 = new Card34());
 		deck.add(card36 = new Card36());
 		deck.add(card38 = new Card38());
-		
-		shuffle(deck);
-		
 	}
 	
 	public ArrayList getDeck(){
@@ -106,7 +104,7 @@ public class Deck{
 		}
 	}
 	
-	public Object deal(){
-		return deck.remove(deck.size() - 1);
+	public Object deal(Object name){
+		return deck.remove(name);
 	}
 }

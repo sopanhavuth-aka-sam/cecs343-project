@@ -106,7 +106,7 @@ public class Deck{
 		}
 	}
 	
-	public Object deal(){
-		return deck.remove(deck.size() - 1);
+	public Object deal(Object name){
+		return deck.remove(name);
 	}
 }
