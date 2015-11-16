@@ -1,3 +1,6 @@
+import java.awt.Image;
+import java.util.ArrayList;
+
 /**
  * 
  * @author sam
@@ -10,6 +13,7 @@ public class Player {
 	 */
 	private String name;
 	private int location, QP, learningPts, craftPts, integrityPts, year, drawPos;
+	private ArrayList<Card> hand = new ArrayList<Card>();
 	
 	/**
 	 * 
@@ -150,5 +154,17 @@ public class Player {
 		return String.format("%s is at %d has learning: %d, craft: %d, integrity: %d\n"
 				+ "QP: %d, draw Position: %d, Year: %d", name, location, learningPts, craftPts,
 				integrityPts, QP, drawPos, year);
+	}
+	
+	public void addCard(Card newCard) {
+		hand.add(newCard);
+	}
+	
+	public void removeCard(int index) {
+		hand.remove(index);
+	}
+	
+	public Image getCardImage(int index) {
+		return hand.get(index).getImg();
 	}
 }
