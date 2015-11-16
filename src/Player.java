@@ -111,7 +111,7 @@ public class Player {
 	 * @param addedQP
 	 */
 	public void updateQP(int addedQP) {
-		this.QP -= addedQP;
+		this.QP += addedQP;
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateLearningPts(int addedPts) {
-		this.learningPts -= addedPts;
+		this.learningPts += addedPts;
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateCraftPts(int addedPts) {
-		this.craftPts -= addedPts;
+		this.craftPts += addedPts;
 	}
 	
 	/**
@@ -135,7 +135,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateIntegrityPts(int addedPts){
-		this.integrityPts -= addedPts;
+		this.integrityPts += addedPts;
 	}
 	
 	/**
@@ -144,5 +144,11 @@ public class Player {
 	 */
 	public void setYear(int newYear) {
 		this.year = newYear;
+	}
+	
+	public String toString() {
+		return String.format("%s is at %d has learning: %d, craft: %d, integrity: %d\n"
+				+ "QP: %d, draw Position: %d, Year: %d", name, location, learningPts, craftPts,
+				integrityPts, QP, drawPos, year);
 	}
 }
