@@ -1,0 +1,20 @@
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+/**
+ * Card Description: 
+ * Physics 151
+ * Play in ECS 308
+ * Success: 
+ * Get 5 crafting pts
+ * Fail: nothing
+ * @author Hieu Tran
+ *
+ */
+
+public class Card14 extends Card{
+
+	
+	
+}

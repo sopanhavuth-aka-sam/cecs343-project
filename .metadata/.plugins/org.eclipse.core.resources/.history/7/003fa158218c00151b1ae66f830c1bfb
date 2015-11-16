@@ -1,0 +1,21 @@
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+/**
+ * Card Description: 
+ * Buddy Up
+ * Join EAT or Soccer Team
+ * Play in EAT room or George Allen Field
+ * Success: 
+ * Get 1 learning pt or 1 crafting pt
+ * Fail: nothing
+ * @author Hieu Tran
+ *
+ */
+
+public class Card12 extends Card {
+	
+	
+	
+}

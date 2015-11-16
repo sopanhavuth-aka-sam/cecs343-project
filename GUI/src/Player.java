@@ -111,7 +111,7 @@ public class Player {
 	 * @param addedQP
 	 */
 	public void updateQP(int addedQP) {
-		this.QP -= addedQP;
+		this.QP += addedQP;
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateLearningPts(int addedPts) {
-		this.learningPts -= addedPts;
+		this.learningPts += addedPts;
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateCraftPts(int addedPts) {
-		this.craftPts -= addedPts;
+		this.craftPts += addedPts;
 	}
 	
 	/**
@@ -135,7 +135,7 @@ public class Player {
 	 * @param addedPts
 	 */
 	public void updateIntegrityPts(int addedPts){
-		this.integrityPts -= addedPts;
+		this.integrityPts += addedPts;
 	}
 	
 	/**

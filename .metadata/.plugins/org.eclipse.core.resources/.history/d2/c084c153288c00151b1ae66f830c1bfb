@@ -1,0 +1,21 @@
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
+/**
+ * Card Description: 
+ * KIN 253
+ * Learning the Rules of Soccer
+ * Play in George Allen Field
+ * Prerequisites:
+ * 4 crafting pts
+ * Success: 
+ * Get 5 quality pts
+ * Fail: Lose 3 quality pts
+ * @author Hieu Tran
+ *
+ */
+
+public class Card16 {
+
+}
