@@ -60,7 +60,7 @@ public class InfoPane extends JPanel {
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(width, height));
 
-
+		//East
 		//testing code for EAST - game information (ignore game action for now)
 		JPanel panelEast = new JPanel();
 		this.add(panelEast, BorderLayout.EAST);
@@ -82,6 +82,11 @@ public class InfoPane extends JPanel {
 		//test updating value
 		modelTable.setValueAt("100", 3, 3); //use this to update all player's info when playButton is clicked.
 
+		//CENTER
+		JPanel panelCenter = new JPanel();
+		this.add(panelCenter, BorderLayout.CENTER);
+		panelCenter.setLayout(new CardLayout());
+		
 
 		// West
 		JPanel panelWest = new JPanel();
