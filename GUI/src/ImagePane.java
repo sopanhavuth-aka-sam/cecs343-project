@@ -32,6 +32,16 @@ public class ImagePane extends JPanel {
 		}
 	}
 	
+	public void setImage(Image image) {
+        this.backgroundImage = image;
+        Dimension size=new Dimension(this.getWidth(),this.getHeight());
+        this.setPreferredSize(size);
+        this.setMinimumSize(size);
+        this.setMaximumSize(size);
+        this.setSize(size);
+        this.setOpaque(false);
+    }
+	
 	/**
 	 * 
 	 */

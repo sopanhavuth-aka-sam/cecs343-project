@@ -9,6 +9,7 @@ public class Player {
 	 * 
 	 */
 	private String name;
+	private Hand playerHand;
 	private int location, QP, learningPts, craftPts, integrityPts, year, drawPos;
 	
 	/**
@@ -98,12 +99,20 @@ public class Player {
 		return this.drawPos;
 	}
 	
+	public Hand getHand(){
+		return this.playerHand;
+	}
+	
 	/**
 	 * 
 	 * @param newLoc
 	 */
 	public void setLoc(int newLoc) {
 		this.location = newLoc;
+	}
+	
+	public void setHand(Hand player){
+		this.playerHand = player;
 	}
 	
 	/**

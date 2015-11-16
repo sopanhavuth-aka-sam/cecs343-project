@@ -87,6 +87,10 @@ public class Display extends JFrame {
 		info.updateAI2(name);
 	}
 	
+	public void updateDeck(Deck deck){
+		info.updateDeck(deck);
+	}
+	
 	/**
 	 * 
 	 */
@@ -102,5 +106,13 @@ public class Display extends JFrame {
 	 */
 	public void addListener(ActionListener al) {
 		info.addListener(al);
+	}
+	
+	public void drawButtonListener(ActionListener draw){
+		info.drawButtonListener(draw);
+	}
+	
+	public void imageButtonListener(ActionListener btn){
+		info.addListener(btn);
 	}
 }

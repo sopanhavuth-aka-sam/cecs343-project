@@ -15,6 +15,8 @@ public class Controller {
 	private Board gameBoard;
 	private Display gameDisplay;
 	private Player human, ai1, ai2;
+	private Deck deck;
+	private Hand player;
 	private static final int TOTAL_ROOM = 21;
 
 	/**
@@ -23,9 +25,10 @@ public class Controller {
 	public Controller() {
 		gameBoard = new Board();
 		gameDisplay = new Display();
-		human = new Player("Jimmy", 17, 0, 0, 0 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 6, 6, 6 , 6, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 0, 0 , 0, 1, 3);
+		player = new Hand();
+		human = new Player("Jimmy", 17, 2, 2, 2 , 0, 1, 1);
+		ai1 = new Player("Mary", 17, 3, 1, 2 , 0, 1, 2);
+		ai2 = new Player("Tom", 17, 0, 3, 3 , 0, 1, 3);
 
 		updateInfoPanel();
 		updateConnectedRoomList();
@@ -98,6 +101,11 @@ public class Controller {
 		updateAI2();
 	}
 	
+	public void updateDeck(){
+		Deck dck = deck;
+		gameDisplay.updateDeck(dck);
+	}
+	
 	/**
 	 * 
 	 */
@@ -117,6 +125,32 @@ public class Controller {
 				updateConnectedRoomList();
 			}
 			
+		});
+	}
+	
+	public void imageButtonListener(){
+		gameDisplay.imageButtonListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Card1 card1 = new Card1();
+				Card2 card2 = new Card2();
+				Card4 card4 = new Card4();
+				Card6 card6 = new Card6();
+				Card8 card8 = new Card8();
+				player.addCard(card1);
+				player.addCard(card1);
+				player.addCard(card1);
+				player.addCard(card1);
+				player.addCard(card1);
+				
+			}
+		});
+	}
+	
+	public void drawButtonListener(){
+		gameDisplay.drawButtonListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Hand player = human.getHand();
+			}
 		});
 	}
 }

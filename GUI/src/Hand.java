@@ -2,16 +2,16 @@ import java.util.ArrayList;
 
 public class Hand {
 	
-	Object[] myHand;
+	ArrayList myHand;
 	private int handSize;
 	
-	public Hand(int amount){
-		myHand = new Object[amount];
+	public Hand(){
 		handSize = 0;
 	}
 	
 	public void addCard(Object newCard){
-		myHand[handSize++] = newCard;
+		myHand.add(newCard);
+		handSize++;
 	}
 	
 	public int handSize(){

@@ -4,6 +4,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,8 +20,8 @@ public class InfoPane extends JPanel {
 	/**
 	 *
 	 */
-	
-	private JButton drawCardBtn, moveBtn, playCardBtn;
+
+	private JButton drawCardBtn, moveBtn, playCardBtn, imageButton;
 	private JList connectedRoomList;
 	private JPanel panel;
 	private JTextArea areaEN;
@@ -24,22 +29,23 @@ public class InfoPane extends JPanel {
 	private JTextArea areaWS;
 	private String selectedRoom;
 	private Player human, ai1, ai2;
+	private Hand player;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
-	
+	private int selected = 0;
 
 	/**
 	 *
 	 */
-	public InfoPane(){
+	public InfoPane() {
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
-		//listSelectionListener
+		// listSelectionListener
 		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				if(!e.getValueIsAdjusting()){
+				if (!e.getValueIsAdjusting()) {
 					selectedRoom = String.valueOf(connectedRoomList.getSelectedValue());
-					//Debug: print selected row
+					// Debug: print selected row
 					System.out.println(selectedRoom);
 				}
 			}
@@ -47,14 +53,14 @@ public class InfoPane extends JPanel {
 		human = new Player("", 0, 0, 0, 0, 0, 0, 0);
 		ai1 = new Player("", 0, 0, 0, 0, 0, 0, 0);
 		ai2 = new Player("", 0, 0, 0, 0, 0, 0, 0);
-		
+
 		view();
 	}
 
 	/**
 	 *
 	 */
-	public void view(){
+	public void view() {
 		Color white = new Color(255, 255, 255);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = (int) screenSize.getHeight();
@@ -75,27 +81,27 @@ public class InfoPane extends JPanel {
 		panelEN.setLayout(new BorderLayout());
 		panelEN.setBackground(white);
 		panelEN.setPreferredSize(new Dimension(800, 150));
-		
+
 		JTable table;
-		Object[] column = {" ", "Learning", "Craft", "Integrity", "Quality Points"};
-		Object[][] data = {{" ", "Learning", "Craft", "Integrity", "Quality Points"},
-				           {human.getName(), Integer.toString(human.getLearningPts()), Integer.toString(human.getCraftPts()), Integer.toString(human.getIntegrityPts()), Integer.toString(human.getQP())},
-						   {ai1.getName(), Integer.toString(ai1.getLearningPts()), Integer.toString(ai1.getCraftPts()), Integer.toString(ai1.getIntegrityPts()), Integer.toString(ai1.getQP())},
-						   {ai2.getName(), Integer.toString(ai2.getLearningPts()), Integer.toString(ai2.getCraftPts()), Integer.toString(ai2.getIntegrityPts()), Integer.toString(ai2.getQP())}
-						   };
+		Object[] column = { " ", "Learning", "Craft", "Integrity", "Quality Points" };
+		Object[][] data = { { " ", "Learning", "Craft", "Integrity", "Quality Points" },
+				{ human.getName(), Integer.toString(human.getLearningPts()), Integer.toString(human.getCraftPts()),
+						Integer.toString(human.getIntegrityPts()), Integer.toString(human.getQP()) },
+				{ ai1.getName(), Integer.toString(ai1.getLearningPts()), Integer.toString(ai1.getCraftPts()),
+						Integer.toString(ai1.getIntegrityPts()), Integer.toString(ai1.getQP()) },
+				{ ai2.getName(), Integer.toString(ai2.getLearningPts()), Integer.toString(ai2.getCraftPts()),
+						Integer.toString(ai2.getIntegrityPts()), Integer.toString(ai2.getQP()) } };
 		model = new DefaultTableModel(data, column);
 		table = new JTable(model);
 		table.setShowGrid(false);
-		table.setIntercellSpacing(new Dimension(0,0));
+		table.setIntercellSpacing(new Dimension(0, 0));
 		table.setPreferredSize(new Dimension(450, 50));
 		table.setEnabled(false);
 		panelEN.add(table, BorderLayout.WEST);
-
 		areaEN = new JTextArea();
 		areaEN.setText("Cards in deck: " + "34\t" + "Discards out of play: " + "0\n");
-		//areaEN.append("You are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		areaEN.append("You are " + human.getName() + " and you are in " + human.getLoc());
 		panelEN.add(areaEN, BorderLayout.SOUTH);
-
 
 		// East-South
 		JPanel panelES = new JPanel();
@@ -106,9 +112,9 @@ public class InfoPane extends JPanel {
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
 		areaES.setPreferredSize(new Dimension(800, 60));
-		//areaES.setText("Human player is " + human.getName());
+		areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
-		scroll.setPreferredSize(new Dimension(800,60));
+		scroll.setPreferredSize(new Dimension(800, 60));
 		panelES.add(scroll);
 
 		// Center
@@ -120,17 +126,33 @@ public class InfoPane extends JPanel {
 		panelCenter.add(panelCF);
 		panelCF.setLayout(new FlowLayout());
 
-		JTextArea areaC = new JTextArea();
-		areaC = new JTextArea();
-		areaC.setEditable(false);
-		areaC.setLineWrap(true);
-		areaC.setWrapStyleWord(true);
-		areaC.setPreferredSize(new Dimension(200, 200));
-		
-		JButton buttonC = new JButton();
-		areaC.add(buttonC);
-		
-		panelCF.add(areaC, BorderLayout.WEST);
+		// Image img;
+		// ArrayList<Card> testHand = new ArrayList<Card>();
+		// testHand.add(new Card1());
+		// testHand.add(new Card2());
+		// testHand.add(new Card4());
+		// int selected = 0;
+		imageButton = new JButton();
+		imageButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Card> testHand = new ArrayList<Card>();
+				testHand.add(new Card1());
+				testHand.add(new Card2());
+				testHand.add(new Card4());
+				if(selected < testHand.size()) {
+					Image img = testHand.get(selected).getImg();
+					imageButton.setIcon(new ImageIcon(img));
+				}
+				selected++;
+				if (selected >= testHand.size()) {
+					selected = 0;
+				}
+			}
+		});
+		imageButton.setPreferredSize(new Dimension(200, 270));
+		JPanel pane = new JPanel();
+		pane.add(imageButton);
+		panelCF.add(pane, BorderLayout.WEST);
 
 		// West
 		JPanel panelWest = new JPanel();
@@ -141,7 +163,7 @@ public class InfoPane extends JPanel {
 		JPanel panelWS = new JPanel();
 		panelWest.add(panelWS, BorderLayout.SOUTH);
 		panelWS.setLayout(new FlowLayout());
-	
+
 		JScrollPane scrollWS = new JScrollPane(connectedRoomList);
 		scrollWS.setPreferredSize(new Dimension(170, 130));
 		panelWS.add(scrollWS);
@@ -157,12 +179,27 @@ public class InfoPane extends JPanel {
 
 		drawCardBtn = new JButton("Draw Card");
 		panelWNG.add(drawCardBtn);
-
 		moveBtn = new JButton("Move");
 		panelWNG.add(moveBtn);
-
 		playCardBtn = new JButton("Play Card");
 		panelWNG.add(playCardBtn);
+
+		int draw = 1;
+		int move = 3;
+		if (draw > 0) {
+			drawCardBtn.setEnabled(true);
+			moveBtn.setEnabled(false);
+			playCardBtn.setEnabled(false);
+			draw--;
+		} else {
+			while (move > 0) {
+				drawCardBtn.setEnabled(false);
+				moveBtn.setEnabled(true);
+				playCardBtn.setEnabled(true);
+				move--;
+			}
+			draw++;
+		}
 
 		// Center-East
 		JPanel panelCE = new JPanel();
@@ -172,7 +209,6 @@ public class InfoPane extends JPanel {
 		// Center-North
 		JPanel panelCN = new JPanel();
 		panelCenter.add(panelCN, BorderLayout.NORTH);
-
 
 	}
 
@@ -190,12 +226,12 @@ public class InfoPane extends JPanel {
 	 */
 	public void updateConnectedRoomList(String[] newList) {
 		roomNames.clear();
-		for(int i=0; i<newList.length; i++) {
+		for (int i = 0; i < newList.length; i++) {
 			roomNames.addElement(newList[i]);
 		}
 	}
-	
-	public void updateHuman(Player name){
+
+	public void updateHuman(Player name) {
 		human = name;
 		model.setValueAt(human.getName(), 1, 0);
 		model.setValueAt(human.getLearningPts(), 1, 1);
@@ -203,17 +239,17 @@ public class InfoPane extends JPanel {
 		model.setValueAt(human.getIntegrityPts(), 1, 3);
 		model.setValueAt(human.getQP(), 1, 4);
 	}
-	
-	public void updateAI1(Player name){
+
+	public void updateAI1(Player name) {
 		ai1 = name;
 		model.setValueAt(ai1.getName(), 2, 0);
 		model.setValueAt(ai1.getLearningPts(), 2, 1);
 		model.setValueAt(ai1.getCraftPts(), 2, 2);
 		model.setValueAt(ai1.getIntegrityPts(), 2, 3);
 		model.setValueAt(ai1.getQP(), 2, 4);
-	}	
-	
-	public void updateAI2(Player name){
+	}
+
+	public void updateAI2(Player name) {
 		ai2 = name;
 		model.setValueAt(ai2.getName(), 3, 0);
 		model.setValueAt(ai2.getLearningPts(), 3, 1);
@@ -221,7 +257,11 @@ public class InfoPane extends JPanel {
 		model.setValueAt(ai2.getIntegrityPts(), 3, 3);
 		model.setValueAt(ai2.getQP(), 3, 4);
 	}
-	
+
+	public void updateDeck(Deck deck) {
+
+	}
+
 	/**
 	 *
 	 * @param al
@@ -229,4 +269,13 @@ public class InfoPane extends JPanel {
 	public void addListener(ActionListener al) {
 		moveBtn.addActionListener(al);
 	}
+
+	public void drawButtonListener(ActionListener draw) {
+		drawCardBtn.addActionListener(draw);
+	}
+
+	public void imageButtonListener(ActionListener image) {
+		imageButton.addActionListener(image);
+	}
+
 }

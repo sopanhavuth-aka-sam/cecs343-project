@@ -36,7 +36,7 @@ public class Card38 extends Card{
 	
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card38.png"));
+			img = ImageIO.read(new File("img/card38.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
