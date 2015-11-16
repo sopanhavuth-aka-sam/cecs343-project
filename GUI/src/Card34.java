@@ -32,7 +32,7 @@ public class Card34 extends Card{
 		reqLocation.add(9);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card34.png"));
+			img = ImageIO.read(new File("img/card34.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

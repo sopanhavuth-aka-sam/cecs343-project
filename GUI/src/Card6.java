@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -21,12 +22,16 @@ public class Card6 extends Card{
 		//Play in ECS 308
 		checkReqLoc = true;
 		reqLocation.add(17);
+	}
+	
+	public Image getImage(Object name){
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card6.png"));
+			img = ImageIO.read(new File("img/card1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return img;
 	}
 
 	/**

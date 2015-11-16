@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -21,9 +22,9 @@ public class Card2 extends Card{
 		//Play in Library
 		checkReqLoc = true;
 		reqLocation.add(7);
-		//initialize image
+		// initialize image
 		try {
-			img = ImageIO.read(new File("/img/card2.png"));
+			img = ImageIO.read(new File("img/card1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -29,7 +29,7 @@ public class Card16 extends Card{
 		
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card16.png"));
+			img = ImageIO.read(new File("img/card16.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

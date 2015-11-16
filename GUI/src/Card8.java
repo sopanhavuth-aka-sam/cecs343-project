@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -23,12 +24,16 @@ public class Card8 extends Card{
 		//Play in Forbidden Parking
 		checkReqLoc = true;
 		reqLocation.add(6);
+	}
+	
+	public Image getImage(Object name){
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card8.png"));
+			img = ImageIO.read(new File("img/card1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return img;
 	}
 
 	/**
