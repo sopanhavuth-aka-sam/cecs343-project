@@ -4,27 +4,30 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Professor Englert
+ * Play in CECS Conference
+ * Prerequisites:
+ * 3 integrity pts
+ * Success: 
+ * Get a chip of choice
+ * Fail: Discard 1 game card
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
+
+public class Card28 extends Card {
 	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
-		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+	public Card28() {
+		name = "Professor Englert";
+		//Required 3 integrity pts
+		checkReqPts = true;
+		reqIntegrityPts = 3;
+		//Play in CECS Conference
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(19);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card28.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,16 +58,27 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 5 quality pts
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		//player.updateQP(3);
+		
+		/*if(player.chooseLearningPts()){
+			player.updateLearningPts(1);
+		}
+		else if(player.chooseCraftPts()){
+			player.updateCraftPts(1);
+		}
+		else if(player.chooseIntegrityPts()){
+			player.updateIntegrityPts(1);
+		}*/
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: Discard 1 game card
 	public Player fail(Player player) {
+		//player.updateGameCard(-1);
 		return player;
 	}
-
+	
 }

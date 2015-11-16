@@ -4,27 +4,33 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Soccer Goalie
+ * Play in George Allen Field
+ * Prerequisites:
+ * 3 learning pts
+ * 3 craft pts
+ * Success: 
+ * Get 5 quality pts
+ * Get 1 game card
+ * Fail: Go to student parking
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
-		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+
+public class Card30 extends Card {
+
+	public Card30() {
+		name = "Soccer Goalie";
+		//Required 3 learning pts, 3 craft pts
+		checkReqPts = true;
+		reqLearningPts = 3;
+		reqCraftPts = 3;
+		//Play in George Allen Field
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(0);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card30.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,16 +61,17 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 5 quality pts, 1 game card
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		player.updateQP(5);
+		//player.updateGameCard(1);
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: Go to student parking
 	public Player fail(Player player) {
+		player.setLoc(2);
 		return player;
 	}
-
 }

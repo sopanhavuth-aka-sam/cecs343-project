@@ -4,27 +4,37 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Goodbye, Professor
+ * Play in Room of Retirement
+ * Prerequisites:
+ * 6 learning pts
+ * 6 crafting pts
+ * 6 integrity pts
+ * Success: 
+ * Get 10 quality pts
+ * Fail: 
+ * Lose 1 game card
+ * Leave this game card in RoR
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
-		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+
+public class Card10 extends Card{
+
+	public Card10() {
+		name = "Goodbye, Professor";
+		//required 6 learning pts, 6 crafting pts, 6 integrity pts
+		checkReqPts = true;
+		reqLearningPts = 6;
+		reqCraftPts = 6;
+		reqIntegrityPts = 6;
+		//Play in Room of Retirement
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(13);
+		
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card10.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,16 +65,17 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 10 quality pts
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		player.updateQP(10);
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: Lose 1 game card, and leave it in RoR
 	public Player fail(Player player) {
+		//player.getDiscard(-1);
 		return player;
 	}
-
+	
 }

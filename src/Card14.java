@@ -4,27 +4,31 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Physics 151
+ * Play in ECS 308
+ * Prerequisites:
+ * 3 crafting pts
+ * Success: 
+ * Get 5 quality pts
+ * Fail: Lose 3 quality pts
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
-		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+
+public class Card14 extends Card{
+
+	public Card14() {
+		name = "Physics 151";
+		//required 3 crafting pts
+		checkReqPts = true;
+		reqCraftPts = 3;
+		//Play in ECS 308
 		checkReqLoc = true;
-		reqLocation.add(14);
 		reqLocation.add(17);
+		
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card14.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,16 +59,16 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 5 quality pts
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		player.updateQP(5);
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: Lose 3 quality pts
 	public Player fail(Player player) {
+		player.updateQP(-3);
 		return player;
 	}
-
 }

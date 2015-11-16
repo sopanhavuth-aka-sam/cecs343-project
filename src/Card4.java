@@ -4,27 +4,26 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
+ * Professor Murgolo's CECS 174 Class
+ * Play in ECS 302
+ * Success: Get 1 learning pt
  * Fail: nothing
- * @author sam
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
+
+public class Card4 extends Card{
+
+	public Card4() {
+		name = "Professor Murgolo's CECS 174 Class";
 		//no point requirement
 		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+		//Play in ECS 302
 		checkReqLoc = true;
 		reqLocation.add(14);
-		reqLocation.add(17);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card4.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,5 +65,5 @@ public class Card1 extends Card{
 	public Player fail(Player player) {
 		return player;
 	}
-
+	
 }

@@ -6,6 +6,7 @@ public abstract class Card {
 	protected String name;
 	protected boolean checkReqPts;
 	protected int reqLearningPts = 0, reqCraftPts = 0, reqIntegrityPts = 0;
+	protected int discard = 0;
 	protected ArrayList<Integer> reqLocation = new ArrayList<Integer>();
 	protected boolean checkReqLoc;
 	protected Image img; //card image
@@ -58,6 +59,15 @@ public abstract class Card {
 			return false;
 		}
 	}
+	/*
+	public boolean discardCard(Player player){
+		if (player.getDiscard() >= discard){
+			return true;
+		}
+		
+		return false;
+	}
+	*/
 	
 	/**
 	 * 

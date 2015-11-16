@@ -24,10 +24,10 @@ public class Controller {
 		gameBoard = new Board();
 		gameDisplay = new Display();
 		human = new Player("Jimmy", 17, 0, 0, 0 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
+		ai1 = new Player("Mary", 17, 6, 6, 6 , 6, 1, 2);
 		ai2 = new Player("Tom", 17, 0, 0, 0 , 0, 1, 3);
 
-	
+		updateInfoPanel();
 		updateConnectedRoomList();
 		drawAllTokens();
 		addListener();
@@ -76,6 +76,28 @@ public class Controller {
 		gameDisplay.updateRoomList(newRoomsStr);
 	}
 	
+	public void updateHuman(){
+		Player player = human;
+		gameDisplay.updateHuman(player);
+	}
+	
+	public void updateAI1(){
+		Player player = ai1;
+		gameDisplay.updateAI1(player);
+	
+	}
+	
+	public void updateAI2(){
+		Player player = ai2;
+		gameDisplay.updateAI2(player);
+	}
+	
+	public void updateInfoPanel(){
+		updateHuman();
+		updateAI1();
+		updateAI2();
+	}
+	
 	/**
 	 * 
 	 */
@@ -97,5 +119,4 @@ public class Controller {
 			
 		});
 	}
-	
 }

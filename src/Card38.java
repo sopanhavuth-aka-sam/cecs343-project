@@ -4,27 +4,39 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Enjoy Nature
+ * Play any space outside ECS
+ * Success: 
+ * Get 1 crafting pts
+ * Teleport to Lactation Lounge
+ * Fail: none
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
+
+public class Card38 extends Card{
+
+	public Card38() {
+		name = "Enjoying Nature";
+		//no requirement
 		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+		//Play in any space outside ECS
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(0);
+		reqLocation.add(1);
+		reqLocation.add(2);
+		reqLocation.add(3);
+		reqLocation.add(4);
+		reqLocation.add(5);
+		reqLocation.add(6);
+		reqLocation.add(7);
+		reqLocation.add(8);
+		reqLocation.add(9);
+		reqLocation.add(10);
+	
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card38.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,16 +67,17 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 1 crafting pt1, teleport to Lactation Lounge
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		player.updateCraftPts(1);
+		player.setLoc(20);
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: none
 	public Player fail(Player player) {
 		return player;
 	}
-
+	
 }

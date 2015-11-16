@@ -75,6 +75,18 @@ public class Display extends JFrame {
 		info.updateConnectedRoomList(newList);
 	}
 	
+	public void updateHuman(Player name){
+		info.updateHuman(name);
+	}
+	
+	public void updateAI1(Player name){
+		info.updateAI1(name);
+	}
+	
+	public void updateAI2(Player name){
+		info.updateAI2(name);
+	}
+	
 	/**
 	 * 
 	 */

@@ -4,27 +4,30 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
- * Fail: nothing
- * @author sam
+ * Fall in the Pond
+ * Play in Japanese Garden
+ * Prerequisites:
+ * 3 learning pts
+ * Success: 
+ * Get 1 craft pt or 1 integrity pt
+ * Fail: Go to Lactation Lounge
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
+
+public class Card22 extends Card {
 	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
-		//no point requirement
-		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+	public Card22() {
+		name = "Fall in the Pond";
+		//Required 3 learning pts
+		checkReqPts = true;
+		reqLearningPts = 3;
+		//Play in Japanese Garden
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(1);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card22.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,15 +58,21 @@ public class Card1 extends Card{
 	}
 
 	@Override
-	//Success: Get 1 learning pts
+	//Success: Get 5 quality pts
 	public Player win(Player player) {
-		player.updateLearningPts(1);
+		//if(player.chooseCraftPts()){
+			player.updateCraftPts(1);
+		//}
+		/*else {
+			player.updateIntegrityPts(1);
+		}*/
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+	//Fail: Go to Lactation Lounge
 	public Player fail(Player player) {
+		player.setLoc(20);
 		return player;
 	}
 

@@ -4,27 +4,28 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * CECS 105
- * Play in ECS 302(14) or 308(17)
- * Success: Get 1 learning pts
+ * Parking Violation
+ * Play in Forbidden Parking
+ * Success: 
+ * Get 1 learning pt
+ * Discard 1 Game Card to get another learning pts
  * Fail: nothing
- * @author sam
+ * @author Hieu Tran
  *
  */
-public class Card1 extends Card{
-	
-	//constructor
-	public Card1() {
-		name = "CECS 105";
+
+public class Card8 extends Card{
+
+	public Card8() {
+		name = "Parking Violation";
 		//no point requirement
 		checkReqPts = false;
-		//Play in ECS 302(14) or 308(17)
+		//Play in Forbidden Parking
 		checkReqLoc = true;
-		reqLocation.add(14);
-		reqLocation.add(17);
+		reqLocation.add(6);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("/img/card8.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -58,6 +59,9 @@ public class Card1 extends Card{
 	//Success: Get 1 learning pts
 	public Player win(Player player) {
 		player.updateLearningPts(1);
+		/*if(discardCard()){
+			player.updateLearningPts(1);
+		}*/
 		return player;
 	}
 
@@ -66,5 +70,5 @@ public class Card1 extends Card{
 	public Player fail(Player player) {
 		return player;
 	}
-
+	
 }
