@@ -745,6 +745,7 @@ org.osgi.service.prefs.BackingStoreException: Exception loading preferences from
 	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1470)
 	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:46)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+<<<<<<< HEAD
 !SESSION 2015-10-15 12:10:09.339 -----------------------------------------------
 eclipse.buildId=4.5.0.I20150603-2000
 java.version=1.7.0_79
@@ -1404,3 +1405,5 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 
 !ENTRY org.eclipse.cdt.core 1 0 2015-11-15 18:08:49.349
 !MESSAGE Indexed 'src' (0 sources, 0 headers) in 0.009 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+=======
+>>>>>>> 6bfa649d2af762180aa98a85000a4c7abb9a27e2

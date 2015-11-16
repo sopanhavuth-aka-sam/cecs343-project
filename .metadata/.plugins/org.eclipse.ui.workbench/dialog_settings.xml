@@ -12,6 +12,7 @@
 		<list key="textEntries">
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="ZipFileImportWizard">
 	</section>
 	<section name="NewWizardAction">
@@ -21,5 +22,12 @@
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
 		</list>
+=======
+	<section name="NewWizardAction">
+	</section>
+	<section name="ZipFileImportWizard">
+	</section>
+	<section name="ImportExportAction">
+>>>>>>> 6bfa649d2af762180aa98a85000a4c7abb9a27e2
 	</section>
 </section>

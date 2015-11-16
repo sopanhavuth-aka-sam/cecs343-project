@@ -17,10 +17,18 @@
 	<section name="BuildPathsPropertyPage">
 		<item value="3" key="pageIndex"/>
 	</section>
+<<<<<<< HEAD
 	<section name="quick_assist_proposal_size">
 	</section>
+=======
+>>>>>>> 6bfa649d2af762180aa98a85000a4c7abb9a27e2
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
+<<<<<<< HEAD
+=======
+	<section name="quick_assist_proposal_size">
+	</section>
+>>>>>>> 6bfa649d2af762180aa98a85000a4c7abb9a27e2
 </section>

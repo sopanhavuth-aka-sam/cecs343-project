@@ -1,0 +1,26 @@
+<<<<<<< HEAD
+public class main {
+	
+public static void main(String[] args) {  
+	
+	Board testBoard = new Board();
+	System.out.print(testBoard.room[0].getName());
+	
+	Display testDisplay = new Display();
+
+	}  
+=======
+
+import java.util.Arrays;
+import javax.swing.JFrame;
+
+
+public class main {
+	
+	public static void main(String[] args) {  
+	
+		Controller gameControl = new Controller();
+	}  
+
+>>>>>>> 33804a970e817babf798ebdaafd460fb0602cf52
+}  
