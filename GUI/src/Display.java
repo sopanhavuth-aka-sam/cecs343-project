@@ -67,12 +67,30 @@ public class Display extends JFrame {
 		return info.getSelectedRoom();
 	}
 	
+	public int getSelectedCard() {
+		return info.getSelectdCard();
+	}
+	
+	/**
+	 * reset selectedCard to -1; This allow ImageButton to display the next
+	 * Available card without skipping a card.
+	 * 
+	 * call this before calling the "abstract doClick()" on ImageButton 
+	 */
+	public void resetSelectedCard() {
+		info.resetSelectedCard();
+	}
+	
 	/**
 	 * 
 	 * @param newList
 	 */
 	public void updateRoomList(String[] newList) {
 		info.updateConnectedRoomList(newList);
+	}
+	
+	public void updatePlayerHand(Hand newHand) {
+		info.updatePlayerHand(newHand);
 	}
 	
 	public void updateHuman(Player name){
@@ -85,10 +103,6 @@ public class Display extends JFrame {
 	
 	public void updateAI2(Player name){
 		info.updateAI2(name);
-	}
-	
-	public void updateDeck(Deck deck){
-		info.updateDeck(deck);
 	}
 	
 	/**
@@ -104,15 +118,20 @@ public class Display extends JFrame {
 	 * 
 	 * @param al
 	 */
-	public void addListener(ActionListener al) {
-		info.addListener(al);
+	public void moveBtnListener(ActionListener al) {
+		info.moveBtnListener(al);
 	}
 	
-	public void drawButtonListener(ActionListener draw){
-		info.drawButtonListener(draw);
+	public void drawCardBtnListener(ActionListener al) {
+		info.drawCardBtnListener(al);
 	}
 	
-	public void imageButtonListener(ActionListener btn){
-		info.addListener(btn);
+	public void playCardBtnListener(ActionListener al) {
+		info.playCardBtnListener(al);
+	}
+	
+	//testing
+	public void clickImageButton() {
+		info.clickImageButton();
 	}
 }

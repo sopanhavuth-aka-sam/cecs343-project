@@ -38,7 +38,7 @@ public class Card16 extends Card{
 	/**
 	 * 
 	 */
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -57,7 +57,7 @@ public class Card16 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	//Success: Get 2 crafting pts

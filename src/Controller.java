@@ -27,9 +27,9 @@ public class Controller {
 	public Controller() {
 		gameBoard = new Board();
 		gameDisplay = new Display();
-		human = new Player("Jimmy", 17, 0, 0, 0 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 6, 6, 6 , 6, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 0, 0 , 0, 1, 3);
+		human = new Player("Jimmy", 17, 2, 2, 2 , 0, 1, 1);
+		ai1 = new Player("Mary", 17, 3, 1, 2 , 0, 1, 2);
+		ai2 = new Player("Tom", 17, 0, 3, 3 , 0, 1, 3);
 		deck = new Deck();
 		playerHand = new Hand();
 

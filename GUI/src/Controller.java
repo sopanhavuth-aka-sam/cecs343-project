@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * 
@@ -16,7 +17,8 @@ public class Controller {
 	private Display gameDisplay;
 	private Player human, ai1, ai2;
 	private Deck deck;
-	private Hand player;
+	private Hand playerHand;
+	//private ArrayList<Card> playerHand = new ArrayList<Card>();
 	private static final int TOTAL_ROOM = 21;
 
 	/**
@@ -25,15 +27,18 @@ public class Controller {
 	public Controller() {
 		gameBoard = new Board();
 		gameDisplay = new Display();
-		player = new Hand();
 		human = new Player("Jimmy", 17, 2, 2, 2 , 0, 1, 1);
 		ai1 = new Player("Mary", 17, 3, 1, 2 , 0, 1, 2);
 		ai2 = new Player("Tom", 17, 0, 3, 3 , 0, 1, 3);
+		deck = new Deck();
+		playerHand = new Hand();
 
 		updateInfoPanel();
 		updateConnectedRoomList();
 		drawAllTokens();
-		addListener();
+		moveBtnListener();
+		drawCardBtnListener();
+		playCardBtnListener();
 	}
 	
 	/**
@@ -79,20 +84,21 @@ public class Controller {
 		gameDisplay.updateRoomList(newRoomsStr);
 	}
 	
+	public void updatePlayerHand() {
+		gameDisplay.updatePlayerHand(playerHand);
+	}
+	
 	public void updateHuman(){
-		Player player = human;
-		gameDisplay.updateHuman(player);
+		gameDisplay.updateHuman(human);
 	}
 	
 	public void updateAI1(){
-		Player player = ai1;
-		gameDisplay.updateAI1(player);
+		gameDisplay.updateAI1(ai1);
 	
 	}
 	
 	public void updateAI2(){
-		Player player = ai2;
-		gameDisplay.updateAI2(player);
+		gameDisplay.updateAI2(ai2);
 	}
 	
 	public void updateInfoPanel(){
@@ -101,56 +107,79 @@ public class Controller {
 		updateAI2();
 	}
 	
-	public void updateDeck(){
-		Deck dck = deck;
-		gameDisplay.updateDeck(dck);
-	}
-	
 	/**
 	 * 
 	 */
-	public void addListener() {
-		gameDisplay.addListener( new ActionListener(){
+	public void moveBtnListener() {
+		gameDisplay.moveBtnListener( new ActionListener(){
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				//get Human player's new room number.
 				int newLoc = roomNameToLoc(gameDisplay.getSelectedRoom());
-				//update human player's loc
+				//update human player's location
 				human.setLoc(newLoc);
 				//update and redraw map
 				clearAllTokens();
 				drawAllTokens();
 				//update connected rooms list(JList)
 				updateConnectedRoomList();
+				
 			}
 			
 		});
 	}
 	
-	public void imageButtonListener(){
-		gameDisplay.imageButtonListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Card1 card1 = new Card1();
-				Card2 card2 = new Card2();
-				Card4 card4 = new Card4();
-				Card6 card6 = new Card6();
-				Card8 card8 = new Card8();
-				player.addCard(card1);
-				player.addCard(card1);
-				player.addCard(card1);
-				player.addCard(card1);
-				player.addCard(card1);
+	public void drawCardBtnListener() {
+		gameDisplay.drawCardBtnListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				//add card from deck to hand
+				playerHand.addCard(deck.deal());
+				//update player hand in infoPane
+				updatePlayerHand();
+				
+				///test code//////
+				System.out.println("card is draw");
+				System.out.println(playerHand.size());
 				
 			}
+			
 		});
 	}
 	
-	public void drawButtonListener(){
-		gameDisplay.drawButtonListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Hand player = human.getHand();
+	public void playCardBtnListener() {
+		gameDisplay.playCardBtnListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println(human.toString());
+				//get selected card index to be played
+				int selectedCard = gameDisplay.getSelectedCard();
+				//play the selected card
+				human = playerHand.getCard(selectedCard).play(human);
+				//remove selected card from hand
+				playerHand.removeCard(selectedCard);
+				//update current player's hand to InfoPane
+				updatePlayerHand();
+				//IGNORE for now -- optimization.//////////////////
+				//Idea: when the card is played, the card image is removed and 
+				//		the next card image is display.
+				gameDisplay.resetSelectedCard();
+				gameDisplay.clickImageButton();
+				//update and redraw map (important of "teleport" card)
+				clearAllTokens();
+				drawAllTokens();
+				
+				
+				////////////////////Debug///////////////////////////
+				System.out.println(human.toString());
 			}
+			
 		});
 	}
 }

@@ -34,7 +34,7 @@ public class Card8 extends Card{
 	/**
 	 * 
 	 */
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -53,7 +53,7 @@ public class Card8 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	//Success: Get 1 learning pts

@@ -45,7 +45,7 @@ public class Card38 extends Card{
 	/**
 	 * 
 	 */
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -64,7 +64,7 @@ public class Card38 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	//Success: Get 1 crafting pt1, teleport to Lactation Lounge
