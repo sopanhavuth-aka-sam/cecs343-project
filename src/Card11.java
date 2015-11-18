@@ -5,11 +5,9 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Goodbye, Professor
- * Play in Room of Retirement (13)
- * Require Point: 6 Learning, 6 Craft, and 6 Integrity
- * Success: Get 10 QP
- * Fail: Lose 1 game card; leave it in Room of Retirement
+ * Enjoying the Peace
+ * Play in Japanese Gardens (1)
+ * Success: get 1 learning pts or 1 integrity pts
  * @author sam
  *
  */
@@ -17,18 +15,15 @@ public class Card11 extends Card{
 
 	//constructor
 		public Card11() {
-			name = "Goodbye, Professor";
-			//(6,6,6)
-			checkReqPts = true;
-			reqLearningPts = 6;
-			reqCraftPts = 6;
-			reqIntegrityPts = 6;
-			//Play in Room of Retirement (13)
+			name = "Enjoying the Peace";
+			//no pts requirement
+			checkReqPts = false;
+			//Play in Japanese Gardens (1)
 			checkReqLoc = true;
-			reqLocation.add(13);
+			reqLocation.add(1);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card11.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -57,13 +52,12 @@ public class Card11 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateQP(10);
+		//NEED: let player choose.
 		return player;
 	}
 
 	@Override
-	//NEED: implement way to leave behind card in a room
-	//		room might need Arraylist to store card left behind
+	//Fail: nothing
 	public Player fail(Player player) {
 		return player;
 	}

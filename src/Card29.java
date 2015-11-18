@@ -5,11 +5,11 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Professor Englert
- * Play in CECS Conference (19)
- * Prerequisite: 3 integrity
- * Success: Get 1 point of you choice
- * Fail: Discard 1 game card
+ * Press the Right Floor
+ * Play in Elevators (16)
+ * Prerequisite: 4 learning
+ * Success: Get 2 craft pts
+ * Fail: lose 2 quality pts
  * @author sam
  *
  */
@@ -17,16 +17,16 @@ public class Card29 extends Card{
 
 	//constructor
 		public Card29() {
-			name = "Professor Englert";
-			//Prerequisite: 3 integrity
+			name = "Press the Right Floor";
+			//Prerequisite: 4 learning
 			checkReqPts = true;
-			reqIntegrityPts = 3;
-			//Play in CECS Conference (19)
+			reqLearningPts = 4;
+			//Play in Play in Elevators (16)
 			checkReqLoc = true;
 			reqLocation.add(19);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card29.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -55,13 +55,13 @@ public class Card29 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		//choose a chip of your choice
+		player.updateCraftPts(2);
 		return player;
 	}
 
 	@Override
-	//Fail: discard 1 game card from player's hand
 	public Player fail(Player player) {
+		player.updateQP(-2);
 		return player;
 	}
 

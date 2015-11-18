@@ -5,11 +5,11 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Elective Class
- * Play in Library (7)
- * Prerequisite: 2 learning
- * Success: Get 1 learning pts and 1 game card
- * Fail: lose 2 QP
+ * Professor Hoffman
+ * Play in any room in ECS (11, 13, 14, 17, 18, 19) except Lactation Lounge
+ * Prerequisite: 3 learning
+ * Success: Get 5 QP and 2 game cards
+ * Fail: lose 5 QP and to to Lactation Lounge (20)
  * @author sam
  *
  */
@@ -17,15 +17,21 @@ public class Card33 extends Card{
 
 	//constructor
 		public Card33() {
-			name = "Exercising Mind and Body";
-			//no point requirement
-			checkReqPts = false;
-			//Play in Student Recreation (5)
+			name = "Professor Hoffman";
+			//Prerequisite: 3 learning
+			checkReqPts = true;
+			reqLearningPts = 3;
+			//Play in any room in ECS (11, 13, 14, 17, 18, 19) except Lactation Lounge
 			checkReqLoc = true;
-			reqLocation.add(5);
+			reqLocation.add(11);
+			reqLocation.add(13);
+			reqLocation.add(14);
+			reqLocation.add(17);
+			reqLocation.add(18);
+			reqLocation.add(19);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card33.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -54,15 +60,15 @@ public class Card33 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateLearningPts(1);
-		//get 1 game card
+		player.updateQP(5);
+		//get 2 game cards
 		return player;
 	}
 
 	@Override
-	//Fail: Lose 2 QP
 	public Player fail(Player player) {
-		player.updateQP(2);
+		player.updateQP(-5);
+		player.setLoc(20);
 		return player;
 	}
 

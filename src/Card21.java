@@ -5,11 +5,11 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Choosing a Major
- * Play in CECS Conference (19)
- * Prerequisite: 3 integrity
- * Success: Get 5 QP
- * Fail: Lose 3 QP
+ * Score a Goal!
+ * Play in George Allen Field (0)
+ * Prerequisite: 3 craft
+ * Success: Get 5 QP and 1 integrity
+ * Fail: go to student parking (2)
  * @author sam
  *
  */
@@ -17,16 +17,16 @@ public class Card21 extends Card{
 
 	//constructor
 		public Card21() {
-			name = "Choosing a Major";
-			//Requirement: 3 Integrity
+			name = "Score a Goal!";
+			//Prerequisite: 3 craft
 			checkReqPts = true;
-			reqIntegrityPts = 3;
-			//Play in CECS Conference (19)
+			reqCraftPts = 3;
+			//Play in George Allen Field (0)
 			checkReqLoc = true;
-			reqLocation.add(19);
+			reqLocation.add(0);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card21.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -56,13 +56,13 @@ public class Card21 extends Card{
 	@Override
 	public Player win(Player player) {
 		player.updateQP(5);
+		player.updateIntegrityPts(1);
 		return player;
 	}
 
 	@Override
-	//Fail: Lose 3 QP
 	public Player fail(Player player) {
-		player.updateQP(-3);
+		player.setLoc(2);
 		return player;
 	}
 

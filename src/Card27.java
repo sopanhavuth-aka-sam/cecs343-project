@@ -5,10 +5,10 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Meet the Dean
- * Play in North (12) or South Hall (13)
- * Prerequisite: 3 learning, 3 craft, and 3 integrity
- * Success: Get 5 QP and draw 1 Game card
+ * Program Crashes
+ * Play in Lactation Lounge (20)
+ * Prerequisite: 2 learning
+ * Success: Get 5 QP and 1 pts of your choice
  * Fail: discard 1 game card
  * @author sam
  *
@@ -17,19 +17,16 @@ public class Card27 extends Card{
 
 	//constructor
 		public Card27() {
-			name = "Meet the Dean";
-			//Prerequisite: 3 learning, 3 craft, and 3 integrity
+			name = "Program Crashes";
+			//Prerequisite: 2 learning
 			checkReqPts = true;
-			reqLearningPts = 3;
-			reqCraftPts = 3;
-			reqIntegrityPts = 3;
-			//Play in North (12) or South Hall (13)
+			reqLearningPts = 2;
+			//Play in Lactation Lounge (20)
 			checkReqLoc = true;
-			reqLocation.add(12);
-			reqLocation.add(13);
+			reqLocation.add(20);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card27.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -58,8 +55,8 @@ public class Card27 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateQP(3);
-		//NEED: function to draw one game card.
+		player.updateQP(5);
+		//NEED: choose a point; 
 		return player;
 	}
 

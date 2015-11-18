@@ -3,10 +3,12 @@ import java.util.Random;
 
 public class Deck{
 	
-	private ArrayList<Card> deck = new ArrayList<Card>();
+	private ArrayList<Card> deck;
 	private Random rand;
+	private int index;
 	
 	public Deck(){
+		deck = new ArrayList<Card>();
 		deck.add(new Card1());
 		deck.add(new Card2());
 		deck.add(new Card3());
@@ -41,38 +43,24 @@ public class Deck{
 		deck.add(new Card32());
 		deck.add(new Card33());
 		deck.add(new Card34());
-		//deck.add(new Card35());
+		deck.add(new Card35());
 		deck.add(new Card36());
-		//deck.add(new Card37());
+		deck.add(new Card37());
 		deck.add(new Card38());
-		//deck.add(new Card39());
-		
-		shuffle(deck);
-		
+		deck.add(new Card39());
 	}
 	
-	public ArrayList getDeck(){
-		return deck;
-	}
+//	public ArrayList getDeck(){
+//		return deck;
+//	}
 	
-	public void shuffle(ArrayList discardDeck){
-		rand = new Random();
-		for(int i = discardDeck.size(); i >= 0; i--){
-			int index = rand.nextInt(i + 1);
-			Object temp = discardDeck.get(i);
-			discardDeck.set(i, discardDeck.get(index));
-			discardDeck.set(index, temp);
-		}
-		
-		for(int index = 0; index < discardDeck.size(); index++){
-			//deck.add(discardDeck.remove(index));
-		}
+	public void shuffle(){
 	}
 	
 	public Card deal(){
-		if(deck.size() > 0) {
-			Card temp = deck.get(0);
-			deck.remove(0);
+		if(index < deck.size()) {
+			Card temp = deck.get(index);
+			index++;
 			return temp;
 		}
 		else {

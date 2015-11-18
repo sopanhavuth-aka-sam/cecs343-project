@@ -5,11 +5,11 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Fall in the Pond
- * Play in Japanese Garden (1)
- * Prerequisite: 3 learning
- * Success: Get 1 Integrity pts and 1 craft pts
- * Fail: go to Lactation Lounge (20)
+ * Make the Dean's List
+ * Play in North (12) or South Halls (15)
+ * Prerequisite: 6 Learning
+ * Success: Get 5 QP
+ * Fail: got to student parking (2)
  * @author sam
  *
  */
@@ -17,16 +17,17 @@ public class Card23 extends Card{
 
 	//constructor
 		public Card23() {
-			name = "Fall in the Pond";
-			//Prerequisite: 3 learning
+			name = "Make the Dean's List";
+			//Prerequisite: 6 Learning
 			checkReqPts = true;
-			reqLearningPts = 3;
-			//Play in Student Recreation (5)
+			reqLearningPts = 6;
+			//Play in North (12) or South Halls (15)
 			checkReqLoc = true;
-			reqLocation.add(5);
+			reqLocation.add(12);
+			reqLocation.add(15);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card23.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -55,15 +56,13 @@ public class Card23 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateIntegrityPts(1);
-		player.updateCraftPts(1);
+		player.updateQP(5);
 		return player;
 	}
 
 	@Override
-	//Fail: go to Lactation Lounge (20)
 	public Player fail(Player player) {
-		player.setLoc(20);
+		player.setLoc(2);
 		return player;
 	}
 

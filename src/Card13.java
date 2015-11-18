@@ -5,9 +5,9 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Buddy Up
- * Play in EAT Room (18) or George Allen Field (0)
- * Success: Get 1 Learning pts or get 1 Craft pts
+ * Late for Class
+ * Play in outside space except Forbidden Parking (0, 1, 2, 3, 4, 5, 7, 8, 9, 10)
+ * Success: Get 1 Craft pts, Move to Lactation Lounge (20)
  * Fail: nothing
  * @author sam
  *
@@ -16,16 +16,18 @@ public class Card13 extends Card{
 
 	//constructor
 		public Card13() {
-			name = "Buddy Up";
+			name = "Late for Class";
 			//no point requirement
 			checkReqPts = false;
-			//lay in EAT Room (18) or George Allen Field (0)
+			//Play in outside
 			checkReqLoc = true;
-			reqLocation.add(18);
-			reqLocation.add(0);
+			for(int i = 0; i <= 10; i++) {
+				reqLocation.add(i);
+			}
+			reqLocation.remove(6); //except Forbidden Parking
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card15.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -54,8 +56,8 @@ public class Card13 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		//NEED: implement way to choose the reward(pop-up)
-		player.updateLearningPts(1);
+		player.updateCraftPts(1);
+		player.setLoc(20);
 		return player;
 	}
 

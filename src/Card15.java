@@ -5,8 +5,8 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Late for Class
- * Play in outside space except Forbidden Parking (0, 1, 2, 3, 4, 5, 7, 8, 9, 10)
+ * The Big Game
+ * Play in the Pyramid (3)
  * Success: Get 1 Craft pts, Move to Lactation Lounge (20)
  * Fail: nothing
  * @author sam
@@ -16,18 +16,15 @@ public class Card15 extends Card{
 
 	//constructor
 		public Card15() {
-			name = "Late for Class";
+			name = "The Big Game";
 			//no point requirement
 			checkReqPts = false;
 			//Play in outside
 			checkReqLoc = true;
-			for(int i = 0; i <= 10; i++) {
-				reqLocation.add(i);
-			}
-			reqLocation.remove(6); //except Forbidden Parking
+			reqLocation.add(3);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card15.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

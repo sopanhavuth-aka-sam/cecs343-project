@@ -5,11 +5,11 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Soccer Goalie
- * Play in George Allen Field (0)
- * Prerequisites = 3 learning and 3 craft
- * Success: Get 5 QP
- * Fail: go to student parking
+ * Elective Class
+ * Play in Library (7)
+ * Prerequisite: 2 learning
+ * Success: Get 1 learning pts and 1 game card
+ * Fail: lose 2 QP
  * @author sam
  *
  */
@@ -17,17 +17,16 @@ public class Card31 extends Card{
 
 	//constructor
 		public Card31() {
-			name = "Soccer Goalie";
-			//Prerequisites = 3 learning and 3 craft
+			name = "Elective Class";
+			//no point requirement
 			checkReqPts = true;
-			reqLearningPts = 3;
-			reqCraftPts = 3;
-			//Play in Student Recreation (5)
+			reqLearningPts = 2;
+			//Play in Library (7)
 			checkReqLoc = true;
-			reqLocation.add(0);
+			reqLocation.add(7);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card33.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -56,15 +55,15 @@ public class Card31 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateQP(5);
-		//draw 1 game card.
+		player.updateLearningPts(1);
+		//get 1 game card
 		return player;
 	}
 
 	@Override
-	//Fail: go to student parking
+	//Fail: Lose 2 QP
 	public Player fail(Player player) {
-		player.setLoc(2);
+		player.updateQP(2);
 		return player;
 	}
 

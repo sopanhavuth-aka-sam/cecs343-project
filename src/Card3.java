@@ -24,7 +24,7 @@ public class Card3 extends Card{
 			reqLocation.add(7);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card3.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

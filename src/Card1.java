@@ -24,7 +24,7 @@ public class Card1 extends Card{
 		reqLocation.add(17);
 		//initialize image
 		try {
-			img = ImageIO.read(new File("/img/card1.png"));
+			img = ImageIO.read(new File("img/card1.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,26 +33,32 @@ public class Card1 extends Card{
 	/**
 	 * 
 	 */
-	@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}
+//	@Override
+//	public Player play(Player player) {
+//		//boolean for passing Point req and Location req
+//		boolean passPts = false, passLoc = false;
+//		//points and location validation: this determine if the play is successes
+//		//or fail
+//		if(checkReqPts) {
+//			passPts = validatePts(player);
+//		}
+//		else {
+//			passPts = true;
+//		}
+//		if(checkReqLoc) {
+//			passLoc = validateLoc(player);
+//		}
+//		else {
+//			passLoc = true;
+//		}
+//		//calling win() or fail() method base on "result"
+//		if(passPts && passLoc) {
+//			return win(player);
+//		}
+//		else {
+//			return fail(player);
+//		}
+//	}
 
 	@Override
 	//Success: Get 1 learning pts

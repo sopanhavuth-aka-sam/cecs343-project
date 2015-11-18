@@ -5,8 +5,9 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * Learning Netbeans
- * Play in Lactation Lounge (20)
+ * Choosing a Major
+ * Play in CECS Conference (19)
+ * Requirement: 3 Integrity
  * Success: Get 5 QP
  * Fail: Lose 3 QP
  * @author sam
@@ -16,15 +17,16 @@ public class Card19 extends Card{
 
 	//constructor
 		public Card19() {
-			name = "Learning Netbeans";
-			//no point requirement
-			checkReqPts = false;
-			//Play in Lactation Lounge (20)
+			name = "Choosing a Major";
+			//Req: 3 integrity
+			checkReqPts = true;
+			reqIntegrityPts = 3;
+			//Play in CECS Conference (19)
 			checkReqLoc = true;
-			reqLocation.add(20);
+			reqLocation.add(19);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card19.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -58,7 +60,6 @@ public class Card19 extends Card{
 	}
 
 	@Override
-	//Fail: Lose 3 QP
 	public Player fail(Player player) {
 		player.updateQP(-3);
 		return player;

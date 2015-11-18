@@ -5,32 +5,33 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * KIN 253
- * Play in George Allen Field (0)
- * Require Point: 4 Integrity
- * Success: Get 2 Craft
- * Fail: go to Room of Retirement (13)
+ * Math 123
+ * Play in ECS 302 (14) or 308 (17)
+ * Require Point: 5 learning
+ * Success: get 5 QP
+ * Fail: lose 3 QP and lose 1 game card
  * @author sam
  *
  */
 public class Card17 extends Card{
 
 	//constructor
-		public Card17() {
-			name = "KIN 253";
-			//require: 4 Integrity
-			checkReqPts = true;
-			reqCraftPts = 4;
-			//Play in George Allen Field (0)
-			checkReqLoc = true;
-			reqLocation.add(0);
-			//initialize image
-			try {
-				img = ImageIO.read(new File(""));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public Card17() {
+		name = "Math 123";
+		//require: 5 learning
+		checkReqPts = true;
+		reqCraftPts = 5;
+		//Play in ECS 302 (14) or 308 (17)
+		checkReqLoc = true;
+		reqLocation.add(14);
+		reqLocation.add(17);
+		//initialize image
+		try {
+			img = ImageIO.read(new File("img/card17.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
 		
 	@Override
 	public Player play(Player player) {
@@ -55,14 +56,14 @@ public class Card17 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		player.updateCraftPts(2);
+		player.updateQP(5);
+		//lose 1 game card
 		return player;
 	}
 
 	@Override
-	//Fail: go to Room of Retirement (13)
 	public Player fail(Player player) {
-		player.setLoc(13);
+		player.updateQP(-3);
 		return player;
 	}
 

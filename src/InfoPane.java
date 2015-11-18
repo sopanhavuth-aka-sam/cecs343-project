@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,6 +18,7 @@ public class InfoPane extends JPanel {
 	 */
 	
 	private JButton drawCardBtn, moveBtn, playCardBtn;
+	private JButton imageButton;
 	private JList connectedRoomList;
 	private JPanel panel;
 	private JTextArea areaEN;
@@ -26,6 +28,8 @@ public class InfoPane extends JPanel {
 	private Player human, ai1, ai2;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
+	private Hand playerHand;
+	private int selectedCard = -1;
 	
 
 	/**
@@ -34,6 +38,8 @@ public class InfoPane extends JPanel {
 	public InfoPane(){
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
+		imageButton = new JButton();
+		playerHand = new Hand();
 		//listSelectionListener
 		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -44,9 +50,28 @@ public class InfoPane extends JPanel {
 				}
 			}
 		});
+		//Dummy value for players
 		human = new Player("", 0, 0, 0, 0, 0, 0, 0);
 		ai1 = new Player("", 0, 0, 0, 0, 0, 0, 0);
 		ai2 = new Player("", 0, 0, 0, 0, 0, 0, 0);
+		
+		////////////test image button////////////
+		imageButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedCard++;
+				if(selectedCard < playerHand.size()) {
+					ImageIcon cardIcon = new ImageIcon(playerHand.getCard(selectedCard).getImg());
+					imageButton.setIcon(cardIcon);
+				}
+				else {
+					selectedCard = 0;
+					ImageIcon cardIcon = new ImageIcon(playerHand.getCard(selectedCard).getImg());
+					imageButton.setIcon(cardIcon);
+				}
+				/////Debug///////////////
+				System.out.println(selectedCard);
+			}
+		});
 		
 		view();
 	}
@@ -120,17 +145,12 @@ public class InfoPane extends JPanel {
 		panelCenter.add(panelCF);
 		panelCF.setLayout(new FlowLayout());
 
-		JTextArea areaC = new JTextArea();
-		areaC = new JTextArea();
-		areaC.setEditable(false);
-		areaC.setLineWrap(true);
-		areaC.setWrapStyleWord(true);
-		areaC.setPreferredSize(new Dimension(200, 200));
+		//Adding imageButton to panel
+		imageButton.setPreferredSize(new Dimension(200, 270));
+		JPanel pane = new JPanel();
+		pane.add(imageButton);
+		panelCF.add(pane, BorderLayout.WEST);
 		
-		JButton buttonC = new JButton();
-		areaC.add(buttonC);
-		
-		panelCF.add(areaC, BorderLayout.WEST);
 
 		// West
 		JPanel panelWest = new JPanel();
@@ -153,7 +173,8 @@ public class InfoPane extends JPanel {
 
 		JPanel panelWNG = new JPanel();
 		panelWN.add(panelWNG);
-		panelWNG.setLayout(new GridLayout(3, 1, 0, 5));
+		//panelWNG.setLayout(new GridLayout(3, 1, 0, 5));
+		panelWNG.setLayout(new FlowLayout());
 
 		drawCardBtn = new JButton("Draw Card");
 		panelWNG.add(drawCardBtn);
@@ -185,6 +206,21 @@ public class InfoPane extends JPanel {
 	}
 
 	/**
+	 * 
+	 * @return
+	 */
+	public int getSelectdCard() {
+		return selectedCard;
+	}
+	
+	/**
+	 * 
+	 */
+	public void resetSelectedCard() {
+		selectedCard = -1;
+	}
+	
+	/**
 	 *
 	 * @param newList
 	 */
@@ -193,6 +229,10 @@ public class InfoPane extends JPanel {
 		for(int i=0; i<newList.length; i++) {
 			roomNames.addElement(newList[i]);
 		}
+	}
+	
+	public void updatePlayerHand(Hand newHand) {
+		playerHand = newHand;
 	}
 	
 	public void updateHuman(Player name){
@@ -231,10 +271,23 @@ public class InfoPane extends JPanel {
 	}
 	
 	/**
-	 * add actionListener to "draw button"
+	 * add actionListener to "draw" button
 	 * @param al
 	 */
 	public void drawCardBtnListener(ActionListener al) {
 		drawCardBtn.addActionListener(al);
+	}
+	
+	/**
+	 * add actionListener to "play card" button
+	 * @param al
+	 */
+	public void playCardBtnListener(ActionListener al) {
+		playCardBtn.addActionListener(al);
+	}
+	
+	//testing abstract click on ImageButton
+	public void clickImageButton() {
+		imageButton.doClick();
 	}
 }

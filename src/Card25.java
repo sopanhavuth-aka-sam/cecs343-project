@@ -5,10 +5,10 @@ import javax.imageio.ImageIO;
 
 /**
  * Card Description: 
- * A New Laptop
- * Play in Computer Lab (11)
- * Prerequisite: 4 Integrity
- * Success: Get 3 QP, get one point of your choice
+ * Meet the Dean
+ * Play in North (12) or South Hall (13)
+ * Prerequisite: 3 learning, 3 craft, and 3 integrity
+ * Success: Get 5 QP and draw 1 Game card
  * Fail: discard 1 game card
  * @author sam
  *
@@ -17,16 +17,19 @@ public class Card25 extends Card{
 
 	//constructor
 		public Card25() {
-			name = "A New Laptop";
-			//Prerequisite: 4 Integrity
+			name = "Meet the Dean";
+			//Prerequisite: 3 learning, 3 craft, and 3 integrity
 			checkReqPts = true;
-			reqIntegrityPts = 4;
-			//Play in Computer Lab (11)
+			reqLearningPts = 3;
+			reqCraftPts = 3;
+			reqIntegrityPts = 3;
+			//Play in North (12) or South Hall (13)
 			checkReqLoc = true;
-			reqLocation.add(11);
+			reqLocation.add(12);
+			reqLocation.add(13);
 			//initialize image
 			try {
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("img/card27.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -56,14 +59,12 @@ public class Card25 extends Card{
 	@Override
 	public Player win(Player player) {
 		player.updateQP(3);
-		//let user choose a point of their choice
-		//player.update...
+		//NEED: function to draw one game card.
 		return player;
 	}
 
 	@Override
-	//Fail: Discard a game card
-	//NEED: Implement function for player to discard a card
+	//Fail: Discard 1 game card from player
 	public Player fail(Player player) {
 		return player;
 	}
