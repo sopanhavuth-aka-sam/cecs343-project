@@ -31,7 +31,7 @@ public class Card3 extends Card{
 			}
 		}
 		
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -50,7 +50,7 @@ public class Card3 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	public Player win(Player player) {

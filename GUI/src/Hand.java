@@ -2,25 +2,30 @@ import java.util.ArrayList;
 
 public class Hand {
 	
-	ArrayList myHand;
-	private int handSize;
+	private ArrayList<Card> hand;
+	private int size;
 	
 	public Hand(){
-		handSize = 0;
+		hand = new ArrayList<Card>();
 	}
 	
-	public void addCard(Object newCard){
-		myHand.add(newCard);
-		handSize++;
+	public void addCard(Card newCard){
+		hand.add(newCard);
 	}
 	
-	public int handSize(){
-		return handSize;
+	public int size(){
+		return hand.size();
 	}
 	
-	public int resetHand(){
-		handSize = 0;
-		return handSize;
+	public void resetHand(){
+		hand.removeAll(hand);
 	}
 	
+	public Card getCard(int index) {
+		return hand.get(index);
+	}
+	
+	public void removeCard(int index) {
+		hand.remove(index);
+	}
 }

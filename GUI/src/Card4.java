@@ -1,4 +1,3 @@
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -22,22 +21,18 @@ public class Card4 extends Card{
 		//Play in ECS 302
 		checkReqLoc = true;
 		reqLocation.add(14);
-	}
-	
-	public Image getImage(Object name){
 		//initialize image
 		try {
-			img = ImageIO.read(new File("img/card1.png"));
+			img = ImageIO.read(new File("img/card4.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return img;
 	}
 
 	/**
 	 * 
 	 */
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -56,7 +51,7 @@ public class Card4 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	//Success: Get 1 learning pts

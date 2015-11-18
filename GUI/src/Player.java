@@ -9,7 +9,6 @@ public class Player {
 	 * 
 	 */
 	private String name;
-	private Hand playerHand;
 	private int location, QP, learningPts, craftPts, integrityPts, year, drawPos;
 	
 	/**
@@ -99,20 +98,12 @@ public class Player {
 		return this.drawPos;
 	}
 	
-	public Hand getHand(){
-		return this.playerHand;
-	}
-	
 	/**
 	 * 
 	 * @param newLoc
 	 */
 	public void setLoc(int newLoc) {
 		this.location = newLoc;
-	}
-	
-	public void setHand(Hand player){
-		this.playerHand = player;
 	}
 	
 	/**
@@ -154,4 +145,14 @@ public class Player {
 	public void setYear(int newYear) {
 		this.year = newYear;
 	}
+	
+	/**
+	 * 
+	 */
+	public String toString() {
+		return String.format("%s is at %d has learning: %d, craft: %d, integrity: %d\n"
+				+ "QP: %d, draw Position: %d, Year: %d", name, location, learningPts, craftPts,
+				integrityPts, QP, drawPos, year);
+	}
+	
 }

@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Card {
@@ -9,18 +10,38 @@ public abstract class Card {
 	protected int discard = 0;
 	protected ArrayList<Integer> reqLocation = new ArrayList<Integer>();
 	protected boolean checkReqLoc;
-	protected Image img; //card image
-	//protected int rewardLearning, rewardCraft, rewardIntegrity, rewardQP;
-	//protected int failLearning, failCraft, failIntegrity, failQP;
-	//protected boolean moveLoc;
-	//protected int newLoc;
+	protected BufferedImage img;
 	
 	/**
 	 * 
 	 * @param player
 	 * @return
 	 */
-	public abstract Player play(Player player);
+	public Player play(Player player) {
+		//boolean for passing Point req and Location req
+		boolean passPts = false, passLoc = false;
+		//points and location validation: this determine if the play is successes
+		//or fail
+		if(checkReqPts) {
+			passPts = validatePts(player);
+		}
+		else {
+			passPts = true;
+		}
+		if(checkReqLoc) {
+			passLoc = validateLoc(player);
+		}
+		else {
+			passLoc = true;
+		}
+		//calling win() or fail() method base on "result"
+		if(passPts && passLoc) {
+			return win(player);
+		}
+		else {
+			return fail(player);
+		}
+	}
 	
 	/**
 	 * 
@@ -45,6 +66,7 @@ public abstract class Card {
 		if(player.getLearningPts() >= reqLearningPts) {
 			if(player.getCraftPts() >= reqCraftPts) {
 				if(player.getIntegrityPts() >= reqIntegrityPts) {
+					System.out.println("check pts");
 					return true;
 				}
 				else {

@@ -1,4 +1,3 @@
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -22,9 +21,9 @@ public class Card2 extends Card{
 		//Play in Library
 		checkReqLoc = true;
 		reqLocation.add(7);
-		// initialize image
+		//initialize image
 		try {
-			img = ImageIO.read(new File("img/card1.png"));
+			img = ImageIO.read(new File("img/card2.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,7 +32,7 @@ public class Card2 extends Card{
 	/**
 	 * 
 	 */
-	@Override
+	/*@Override
 	public Player play(Player player) {
 		//boolean flag identifying if the play successes or fail
 		boolean result = false;
@@ -52,7 +51,7 @@ public class Card2 extends Card{
 		else {
 			return fail(player);
 		}
-	}
+	}*/
 
 	@Override
 	//Success: Get 1 learning pts

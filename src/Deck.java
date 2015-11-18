@@ -4,11 +4,13 @@ import java.util.Random;
 public class Deck{
 	
 	private ArrayList<Card> deck;
+	private ArrayList<Card> discardDeck;
 	private Random rand;
 	private int index;
 	
 	public Deck(){
 		deck = new ArrayList<Card>();
+		discardDeck = new ArrayList<Card>();
 		deck.add(new Card1());
 		deck.add(new Card2());
 		deck.add(new Card3());
@@ -54,7 +56,20 @@ public class Deck{
 //		return deck;
 //	}
 	
+	public void reusedDiscardDeck(){
+		for(int i = 0; i < discardDeck.size(); i++){
+			deck.add(discardDeck.remove(index));
+		}
+	}
+	
 	public void shuffle(){
+		rand = new Random();
+		for(int i = (deck.size() - 1); i > 0; i--){
+			int j = rand.nextInt(i + 1);
+			Card temp = deck.get(i);
+			deck.set(i, deck.get(j));
+			deck.set(index, temp);
+		}
 	}
 	
 	public Card deal(){
@@ -67,5 +82,13 @@ public class Deck{
 			System.out.println("The deck is empty");
 			return null;
 		}
+	}
+	
+	public int size(){
+		return deck.size();
+	}
+	
+	public int discardDeckSize(){
+		return discardDeck.size();
 	}
 }
