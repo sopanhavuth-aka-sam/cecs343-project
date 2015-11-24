@@ -134,7 +134,7 @@ public class InfoPane extends JPanel {
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
 		areaES.setPreferredSize(new Dimension(800, 60));
-		// areaES.setText("Human player is " + human.getName());
+		//areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
 		scroll.setPreferredSize(new Dimension(800, 60));
 		panelES.add(scroll);
@@ -175,7 +175,8 @@ public class InfoPane extends JPanel {
 
 		JPanel panelWNG = new JPanel();
 		panelWN.add(panelWNG);
-		panelWNG.setLayout(new GridLayout(3, 1, 0, 5));
+		//panelWNG.setLayout(new GridLayout(3, 1, 0, 5));
+		panelWNG.setLayout(new FlowLayout()); //dont change this until button position is fixed
 
 		drawCardBtn = new JButton("Draw Card");
 		panelWNG.add(drawCardBtn);
@@ -298,5 +299,35 @@ public class InfoPane extends JPanel {
 	// testing abstract click on ImageButton
 	public void clickImageButton() {
 		imageButton.doClick();
+	}
+	
+	//toggle move button clickable/not
+	public void toggleMoveBtn() {
+		if(moveBtn.isEnabled()) {
+			moveBtn.setEnabled(false);
+		}
+		else {
+			moveBtn.setEnabled(true);
+		}
+	}
+	
+	//toggle draw button clickable/not
+	public void toggleDrawBtn() {
+		if(drawCardBtn.isEnabled()) {
+			drawCardBtn.setEnabled(false);
+		}
+		else {
+			drawCardBtn.setEnabled(true);
+		}
+	}
+	
+	//toggle play button clickable/not
+	public void togglePlayBtn() {
+		if(playCardBtn.isEnabled()) {
+			playCardBtn.setEnabled(false);
+		}
+		else {
+			playCardBtn.setEnabled(true);
+		}
 	}
 }

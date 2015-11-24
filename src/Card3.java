@@ -56,7 +56,7 @@ public class Card3 extends Card{
 	public Player win(Player player) {
 		Object[] option = {"Learning", "Integrity"};
 	    String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-	            "The Choice of a Lifetime", JOptionPane.PLAIN_MESSAGE, null,
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
 	            option, option[1]);
 		if(input.equals("Learning")) {
 			player.updateLearningPts(1);

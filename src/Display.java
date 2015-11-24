@@ -134,4 +134,19 @@ public class Display extends JFrame {
 	public void clickImageButton() {
 		info.clickImageButton();
 	}
+	
+	//toggle move button clickable/not
+	public void toggleMoveBtn() {
+		info.toggleMoveBtn();
+	}
+	
+	//toggle draw button clickable/not
+	public void toggleDrawBtn() {
+		info.toggleDrawBtn();
+	}
+	
+	//toggle play button clickable/not
+	public void togglePlayBtn() {
+		info.togglePlayBtn();
+	}
 }

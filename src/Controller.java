@@ -27,12 +27,25 @@ public class Controller {
 	public Controller() {
 		gameBoard = new Board();
 		gameDisplay = new Display();
-		human = new Player("Jimmy", 17, 2, 2, 2 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 3, 1, 2 , 0, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 3, 3 , 0, 1, 3);
+		human = new Player("Jimmy", 17, 6, 6, 6 , 0, 1, 1);
+		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
+		ai2 = new Player("Tom", 17, 0, 0, 0, 0, 1, 3);
 		deck = new Deck();
 		playerHand = new Hand();
 
+		//shuffle deck and deal 5 card to player at the start of the game
+		//deck.shuffle();//shuffle is broken
+		for(int i = 0; i < 5; i++) {
+			playerHand.addCard(deck.deal());
+		}
+		playerHand.addCard(new Card13());//add to test teleport
+		updatePlayerHand(); //update player hand in infopane
+		
+		//disable move and play button at the start of game
+		gameDisplay.toggleMoveBtn();
+		gameDisplay.togglePlayBtn();
+		
+		//
 		updateInfoPanel();
 		updateConnectedRoomList();
 		drawAllTokens();
@@ -141,6 +154,11 @@ public class Controller {
 				playerHand.addCard(deck.deal());
 				//update player hand in infoPane
 				updatePlayerHand();
+				//enable move and play button
+				gameDisplay.toggleMoveBtn();
+				gameDisplay.togglePlayBtn();
+				//disable draw button
+				gameDisplay.toggleDrawBtn();
 				
 				///test code//////
 				System.out.println("card is draw");
@@ -174,12 +192,21 @@ public class Controller {
 				//update and redraw map (important of "teleport" card)
 				clearAllTokens();
 				drawAllTokens();
-				
+				//update the infopane for player detail
+				updateInfoPanel();
+				gameDisplay.toggleDrawBtn();
+				gameDisplay.toggleMoveBtn();
+				gameDisplay.togglePlayBtn();
 				
 				////////////////////Debug///////////////////////////
 				System.out.println(human.toString());
 			}
 			
 		});
+	}
+	
+	//implement ai behavior
+	public void aiAction() {
+		
 	}
 }
