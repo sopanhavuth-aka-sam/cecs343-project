@@ -27,7 +27,7 @@ public class Card13 extends Card{
 			reqLocation.remove(6); //except Forbidden Parking
 			//initialize image
 			try {
-				img = ImageIO.read(new File("img/card15.png"));
+				img = ImageIO.read(new File("img/card13.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

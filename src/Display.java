@@ -149,4 +149,10 @@ public class Display extends JFrame {
 	public void togglePlayBtn() {
 		info.togglePlayBtn();
 	}
+	
+	////////////////////////////test code/////////////////
+	//call when: 1. draw card, 2. move, 3. after play
+	public void updateGameInfo() {
+		info.updateGameInfo();
+	}
 }

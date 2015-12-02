@@ -85,7 +85,10 @@ public class Deck{
 	}
 	
 	public int size(){
-		return deck.size();
+		//test code//////////////////////
+		System.out.println(deck.size() - index);
+		
+		return deck.size() - index;
 	}
 	
 	public int discardDeckSize(){

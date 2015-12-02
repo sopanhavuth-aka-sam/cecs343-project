@@ -20,18 +20,27 @@ public class Controller {
 	private Hand playerHand;
 	//private ArrayList<Card> playerHand = new ArrayList<Card>();
 	private static final int TOTAL_ROOM = 21;
-
+	//private Model model;
+	
 	/**
 	 * 
 	 */
 	public Controller() {
-		gameBoard = new Board();
-		gameDisplay = new Display();
-		human = new Player("Jimmy", 17, 6, 6, 6 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 0, 0, 0, 1, 3);
-		deck = new Deck();
-		playerHand = new Hand();
+		Model.init();//initialize model once
+//		gameBoard = new Board();
+//		gameDisplay = new Display();
+//		human = new Player("Jimmy", 17, 6, 6, 6 , 0, 1, 1);
+//		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
+//		ai2 = new Player("Tom", 17, 0, 0, 0, 0, 1, 3);
+//		deck = new Deck();
+//		playerHand = new Hand();
+		gameBoard = Model.gameBoard;
+		gameDisplay = Model.gameDisplay;
+		human = Model.human;
+		ai1 = Model.ai1;
+		ai2 = Model.ai2;
+		deck = Model.deck;
+		playerHand = Model.playerHand;
 
 		//shuffle deck and deal 5 card to player at the start of the game
 		//deck.shuffle();//shuffle is broken
@@ -39,6 +48,7 @@ public class Controller {
 			playerHand.addCard(deck.deal());
 		}
 		playerHand.addCard(new Card13());//add to test teleport
+		playerHand.addCard(new Card8());//add to test discard card
 		updatePlayerHand(); //update player hand in infopane
 		
 		//disable move and play button at the start of game
@@ -159,6 +169,8 @@ public class Controller {
 				gameDisplay.togglePlayBtn();
 				//disable draw button
 				gameDisplay.toggleDrawBtn();
+				//update basic game info in infoPane
+				gameDisplay.updateGameInfo();
 				
 				///test code//////
 				System.out.println("card is draw");
@@ -178,10 +190,23 @@ public class Controller {
 				System.out.println(human.toString());
 				//get selected card index to be played
 				int selectedCard = gameDisplay.getSelectedCard();
+				//get selected card's name
+				String selectedName = playerHand.getCard(selectedCard).getName();
 				//play the selected card
 				human = playerHand.getCard(selectedCard).play(human);
-				//remove selected card from hand
-				playerHand.removeCard(selectedCard);
+				/**
+				 * remove selected card from hand (using selectedName)
+				 * this is done because index of selected card change when playing
+				 * a card that allow discarding or drawing card
+				 */
+				for (int i = 0; i < playerHand.size(); i++) {
+					if(playerHand.getCard(i).getName().equals(selectedName)) {
+						playerHand.removeCard(i);
+					}
+				}
+				
+//				//remove selected card from hand
+//				playerHand.removeCard(selectedCard);
 				//update current player's hand to InfoPane
 				updatePlayerHand();
 				//IGNORE for now -- optimization.//////////////////

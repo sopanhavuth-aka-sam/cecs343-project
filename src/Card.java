@@ -11,6 +11,8 @@ public abstract class Card {
 	protected ArrayList<Integer> reqLocation = new ArrayList<Integer>();
 	protected boolean checkReqLoc;
 	protected BufferedImage img;
+	protected Hand hand = Model.playerHand;
+	protected Deck deck = Model.deck;
 	
 	/**
 	 * 
@@ -107,5 +109,9 @@ public abstract class Card {
 	
 	public Image getImg() {
 		return img;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }
