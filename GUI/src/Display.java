@@ -33,7 +33,6 @@ public class Display extends JFrame {
 
 		
 		//adding ImagePane
-		
 		JScrollPane scrollImage = new JScrollPane(imageP);
 		this.setVisible(true);
 		scrollImage.setPreferredSize(new Dimension((int)(width/1.05),(int)(height/1.5)));
@@ -133,5 +132,26 @@ public class Display extends JFrame {
 	//testing
 	public void clickImageButton() {
 		info.clickImageButton();
+	}
+	
+	//toggle move button clickable/not
+	public void toggleMoveBtn() {
+		info.toggleMoveBtn();
+	}
+	
+	//toggle draw button clickable/not
+	public void toggleDrawBtn() {
+		info.toggleDrawBtn();
+	}
+	
+	//toggle play button clickable/not
+	public void togglePlayBtn() {
+		info.togglePlayBtn();
+	}
+	
+	////////////////////////////test code/////////////////
+	//call when: 1. draw card, 2. move, 3. after play
+	public void updateGameInfo() {
+		info.updateGameInfo();
 	}
 }

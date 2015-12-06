@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -52,12 +53,20 @@ public class Card11 extends Card{
 
 	@Override
 	public Player win(Player player) {
-		//NEED: let player choose.
+		Object[] option = {"Learning", "Integrity"};
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		if(input.equals("Learning")) {
+			player.updateLearningPts(1);
+		}
+		else{
+			player.updateIntegrityPts(1);
+		}
 		return player;
 	}
 
 	@Override
-	//Fail: nothing
 	public Player fail(Player player) {
 		return player;
 	}
