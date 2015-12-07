@@ -33,12 +33,39 @@ public class Card22 extends Card {
 		}
 	}
 
-	@Override
-	//Success: get 1 craft and 1 integrity chips
-	public Player win(Player player) {
-			player.updateCraftPts(1);
-			player.updateIntegrityPts(1);
+	/**
+	 * 
+	 */
+	/*@Override
+	public Player play(Player player) {
+		//boolean flag identifying if the play successes or fail
+		boolean result = false;
+		//points and location validation: this determine if the play is successes
+		//or fail
+		if(checkReqPts) {
+			result = validatePts(player);
+		}
+		if(checkReqLoc) {
+			result = validateLoc(player);
+		}
+		//calling win() or fail() method base on "result"
+		if(result) {
+			return win(player);
+		}
+		else {
+			return fail(player);
+		}
+	}*/
 
+	@Override
+	//Success: Get 5 quality pts
+	public Player win(Player player) {
+		//if(player.chooseCraftPts()){
+			player.updateCraftPts(1);
+		//}
+		/*else {
+			player.updateIntegrityPts(1);
+		}*/
 		return player;
 	}
 

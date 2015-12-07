@@ -36,7 +36,7 @@ public class Controller {
 		playerHand = Model.playerHand;
 
 		//shuffle deck and deal 5 card to player at the start of the game
-		//deck.shuffle();//shuffle is broken
+		deck.shuffle();//shuffle is broken
 		for(int i = 0; i < 5; i++) {
 			playerHand.addCard(deck.deal());
 		}

@@ -32,9 +32,28 @@ public class Card21 extends Card{
 			}
 		}
 		
+	/*@Override
+	public Player play(Player player) {
+		//boolean flag identifying if the play successes or fail
+		boolean result = false;
+		//points and location validation: this determine if the play is successes
+		//or fail
+		if(checkReqPts) {
+			result = validatePts(player);
+		}
+		if(checkReqLoc) {
+			result = validateLoc(player);
+		}
+		//calling win() or fail() method base on "result"
+		if(result) {
+			return win(player);
+		}
+		else {
+			return fail(player);
+		}
+	}*/
 
 	@Override
-	//Win: get 5 QP and 1 integrity chip
 	public Player win(Player player) {
 		player.updateQP(5);
 		player.updateIntegrityPts(1);
@@ -42,7 +61,6 @@ public class Card21 extends Card{
 	}
 
 	@Override
-	//Fail: go to student parking(2)
 	public Player fail(Player player) {
 		player.setLoc(2);
 		return player;

@@ -27,8 +27,8 @@ public class InfoPane extends JPanel {
 	private String selectedRoom;
 	private Player human, ai1, ai2;
 	private Deck deck;
-	private Board gameBoard;
-	private Deck discardCard;
+	private Deck discardDeck;
+	private Board board;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
 	private Hand playerHand;
@@ -38,16 +38,16 @@ public class InfoPane extends JPanel {
 	 *
 	 */
 	public InfoPane() {
-		deck = Model.deck;
-		gameBoard = Model.gameBoard;
-		
-		
-		
-		discardCard = new Deck();
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
 		imageButton = new JButton();
 		playerHand = new Hand();
+		human = Model.human;
+		ai1 = Model.ai1;
+		ai2 = Model.ai2;
+		deck = Model.deck;
+		discardDeck = Model.discardDeck;
+		board = Model.gameBoard;
 		// listSelectionListener
 		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -58,10 +58,6 @@ public class InfoPane extends JPanel {
 				}
 			}
 		});
-		// Dummy value for players
-		human = new Player("", 0, 0, 0, 0, 0, 0, 0);
-		ai1 = new Player("", 0, 0, 0, 0, 0, 0, 0);
-		ai2 = new Player("", 0, 0, 0, 0, 0, 0, 0);
 
 		//////////// test image button////////////
 		imageButton.addActionListener(new ActionListener() {
@@ -99,14 +95,16 @@ public class InfoPane extends JPanel {
 		JPanel panelEast = new JPanel();
 		this.add(panelEast, BorderLayout.EAST);
 		panelEast.setLayout(new BorderLayout());
-		panelEast.setPreferredSize(new Dimension(800, 150));
+		int eastHeight = (int) (height / 1.66);
+		int eastWidth = (int) (width / 1.66);
+		panelEast.setPreferredSize(new Dimension(eastWidth, eastHeight));
 
 		// East-North
 		JPanel panelEN = new JPanel();
 		panelEast.add(panelEN, BorderLayout.NORTH);
 		panelEN.setLayout(new BorderLayout());
 		panelEN.setBackground(white);
-		panelEN.setPreferredSize(new Dimension(800, 150));
+		panelEN.setPreferredSize(new Dimension((int) (eastWidth / 0.95), (int) (eastHeight / 0.95)));
 
 		JTable table;
 		Object[] column = { " ", "Learning", "Craft", "Integrity", "Quality Points" };
@@ -126,9 +124,8 @@ public class InfoPane extends JPanel {
 		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
-		updateGameInfo();
-//		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardCard.discardDeckSize());
-//		areaEN.append("\nYou are " + human.getName() + " and you are in " + human.getLoc());
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
+		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
 		// East-South
@@ -139,10 +136,10 @@ public class InfoPane extends JPanel {
 		areaES.setEditable(false);
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
-		areaES.setPreferredSize(new Dimension(800, 60));
-		//areaES.setText("Human player is " + human.getName());
+		areaES.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 2)));
+		areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
-		scroll.setPreferredSize(new Dimension(800, 60));
+		scroll.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 2)));
 		panelES.add(scroll);
 
 		// Center
@@ -151,19 +148,47 @@ public class InfoPane extends JPanel {
 		panelCenter.setLayout(new BorderLayout());
 
 		JPanel panelCF = new JPanel();
-		panelCenter.add(panelCF);
-		panelCF.setLayout(new FlowLayout());
+		// panelCenter.add(panelCF);
+		// panelCF.setLayout(new FlowLayout());
 
 		// Adding imageButton to panel
 		imageButton.setPreferredSize(new Dimension(200, 270));
 		JPanel pane = new JPanel();
 		pane.add(imageButton);
-		panelCF.add(pane, BorderLayout.WEST);
+		panelCenter.add(pane);
+
+		// Center-South
+		JPanel panelCS = new JPanel();
+		panelCenter.add(panelCS, BorderLayout.SOUTH);
 
 		// West
 		JPanel panelWest = new JPanel();
 		this.add(panelWest, BorderLayout.WEST);
 		panelWest.setLayout(new BorderLayout());
+
+		// West-North
+		JPanel panelWN = new JPanel();
+		panelWest.add(panelWN, BorderLayout.NORTH);
+		panelWN.setLayout(new BorderLayout());
+		JPanel panelWNW = new JPanel();
+		panelWN.add(panelWNW, BorderLayout.WEST);
+
+		JPanel panelWNG = new JPanel();
+		panelWNW.add(panelWNG);
+		panelWNG.setLayout(new GridLayout(3, 1, 0, 3));
+		// panelWNG.setLayout(new FlowLayout()); // dont change this until
+		// button position is fixed
+
+		drawCardBtn = new JButton("Draw Card");
+		panelWNG.add(drawCardBtn);
+		moveBtn = new JButton("Move");
+		panelWNG.add(moveBtn);
+		playCardBtn = new JButton("Play Card");
+		panelWNG.add(playCardBtn);
+
+		// West-Center
+		JPanel panelWC = new JPanel();
+		panelWest.add(panelWC, BorderLayout.CENTER);
 
 		// West-South
 		JPanel panelWS = new JPanel();
@@ -173,32 +198,6 @@ public class InfoPane extends JPanel {
 		JScrollPane scrollWS = new JScrollPane(connectedRoomList);
 		scrollWS.setPreferredSize(new Dimension(170, 130));
 		panelWS.add(scrollWS);
-
-		// West-North
-		JPanel panelWN = new JPanel();
-		panelWest.add(panelWN, BorderLayout.WEST);
-		panelWN.setLayout(new FlowLayout());
-
-		JPanel panelWNG = new JPanel();
-		panelWN.add(panelWNG);
-		//panelWNG.setLayout(new GridLayout(3, 1, 0, 5));
-		panelWNG.setLayout(new FlowLayout()); //dont change this until button position is fixed
-
-		drawCardBtn = new JButton("Draw Card");
-		panelWNG.add(drawCardBtn);
-		moveBtn = new JButton("Move");
-		panelWNG.add(moveBtn);
-		playCardBtn = new JButton("Play Card");
-		panelWNG.add(playCardBtn);
-
-		// Center-East
-		JPanel panelCE = new JPanel();
-		// panelCenter.add(panelCE, BorderLayout.EAST);
-		panelCE.add(new JLabel(new ImageIcon("")));
-
-		// Center-North
-		JPanel panelCN = new JPanel();
-		panelCenter.add(panelCN, BorderLayout.NORTH);
 
 	}
 
@@ -267,14 +266,6 @@ public class InfoPane extends JPanel {
 		model.setValueAt(ai2.getQP(), 3, 4);
 	}
 
-//	public void updateDeck(Deck deck) {
-//		newDeck = deck;
-//	}
-
-	public void updateDiscardDeck(Deck deck) {
-		discardCard = deck;
-	}
-
 	/**
 	 * add actionListener to "move button"
 	 * 
@@ -306,69 +297,45 @@ public class InfoPane extends JPanel {
 	public void clickImageButton() {
 		imageButton.doClick();
 	}
-	
-	//toggle move button clickable/not
-	/**
-	 * UPDATE: toggle for move button is not enough.
-	 * we need to disable it at the start of the game and after 3 moves.
-	 * using toggles after 3 moves would mess up the control flow of the game.
-	 * the game would be DRAW(enable) MOVE(enable) PLAY(disable) while it should have been
-	 * 					DRAW(enable) MOVE(disable) PLAY(disable)
-	 * SOLUTION: implement disable and enable methods just for move button
-	 */
+
+	// toggle move button clickable/not
 	public void toggleMoveBtn() {
-		if(moveBtn.isEnabled()) {
+		if (moveBtn.isEnabled()) {
 			moveBtn.setEnabled(false);
-		}
-		else {
+		} else {
 			moveBtn.setEnabled(true);
 		}
 	}
-	
-	/**
-	 * 
-	 */
-	public void disableMoveBtn() {
-		if(moveBtn.isEnabled()) {
-			moveBtn.setEnabled(false);
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	public void enableMoveBtn() {
-		if(!moveBtn.isEnabled()) {
-			moveBtn.setEnabled(true);
-		}
-	}
-	
-	//toggle draw button clickable/not
+
+	// toggle draw button clickable/not
 	public void toggleDrawBtn() {
-		if(drawCardBtn.isEnabled()) {
+		if (drawCardBtn.isEnabled()) {
 			drawCardBtn.setEnabled(false);
-		}
-		else {
+		} else {
 			drawCardBtn.setEnabled(true);
 		}
 	}
-	
-	//toggle play button clickable/not
+
+	// toggle play button clickable/not
 	public void togglePlayBtn() {
-		if(playCardBtn.isEnabled()) {
+		if (playCardBtn.isEnabled()) {
 			playCardBtn.setEnabled(false);
-		}
-		else {
+		} else {
 			playCardBtn.setEnabled(true);
 		}
 	}
-	
-	//////////////////Test Code/////////////////////
-	//update deck count, card discard, and current position
+
+	////////////////// Test Code/////////////////////
+	// update deck count, card discard, and current position
 	public void updateGameInfo() {
+
 		int totalQP = human.getQP() + ai1.getQP() + ai2.getQP();
-		areaEN.setText("Cards in deck: " + deck.size());
-		areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		//areaEN.setText("Cards in deck: " + deck.size());
+		//areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
 		areaEN.append("\nTotal Quality Points is " + totalQP);
+
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
+		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
+
 	}
 }

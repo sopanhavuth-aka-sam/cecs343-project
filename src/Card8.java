@@ -36,31 +36,27 @@ public class Card8 extends Card{
 
 
 	@Override
-	//Win: Get 1 Learning chip; Discard 1 card and get 1 more Learning chip
+	//Success: Get 1 Learning chip; Discard 1 card and get 1 more Learning chip
 	public Player win(Player player) {
 		//add 1 learning chip
 		player.updateLearningPts(1);
-		try {
-			//create arraylist of cardName in the hand; excluding this card
-			ArrayList<String> cardName = new ArrayList<String>();
-			for (int i = 0; i < hand.size(); i++) {
-				if(!name.equals(hand.getCard(i).getName())){
-					cardName.add(hand.getCard(i).getName());
-				}
+		//create arraylist of cardName in the hand; excluding this card
+		ArrayList<String> cardName = new ArrayList<String>();
+		for (int i = 0; i < hand.size(); i++) {
+			if(!name.equals(hand.getCard(i).getName())){
+				cardName.add(hand.getCard(i).getName());
 			}
-			//convert arraylist of cardName into array Object[]
-			Object[] option = cardName.toArray();
-			String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-					"Choose a card to discard", JOptionPane.PLAIN_MESSAGE, null,
-		            option, option[1]);
-			//remove card(input) from hand
-			for (int i = 0; i < hand.size(); i++) {
-				if(hand.getCard(i).getName().equals(input)) {
-					hand.removeCard(i);
-				}
+		}
+		//convert arraylist of cardName into array Object[]
+		Object[] option = cardName.toArray();
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		//remove card(input) from hand
+		for (int i = 0; i < hand.size(); i++) {
+			if(hand.getCard(i).getName().equals(input)) {
+				hand.removeCard(i);
 			}
-		} catch(NullPointerException e) {
-			System.out.println("AI try to discard card from hand");
 		}
 		//add 1 learning chip
 		player.updateLearningPts(1);

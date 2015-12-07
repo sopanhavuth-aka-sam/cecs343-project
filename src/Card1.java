@@ -30,8 +30,38 @@ public class Card1 extends Card{
 		}
 	}
 
+	/**
+	 * 
+	 */
+//	@Override
+//	public Player play(Player player) {
+//		//boolean for passing Point req and Location req
+//		boolean passPts = false, passLoc = false;
+//		//points and location validation: this determine if the play is successes
+//		//or fail
+//		if(checkReqPts) {
+//			passPts = validatePts(player);
+//		}
+//		else {
+//			passPts = true;
+//		}
+//		if(checkReqLoc) {
+//			passLoc = validateLoc(player);
+//		}
+//		else {
+//			passLoc = true;
+//		}
+//		//calling win() or fail() method base on "result"
+//		if(passPts && passLoc) {
+//			return win(player);
+//		}
+//		else {
+//			return fail(player);
+//		}
+//	}
+
 	@Override
-	//Win: Get 1 learning pts
+	//Success: Get 1 learning pts
 	public Player win(Player player) {
 		player.updateLearningPts(1);
 		return player;

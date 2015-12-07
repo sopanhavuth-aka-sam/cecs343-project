@@ -52,10 +52,6 @@ public class Deck{
 		deck.add(new Card39());
 	}
 	
-//	public ArrayList getDeck(){
-//		return deck;
-//	}
-	
 	public void reusedDiscardDeck(){
 		for(int i = 0; i < discardDeck.size(); i++){
 			deck.add(discardDeck.remove(index));
@@ -68,13 +64,13 @@ public class Deck{
 			int j = rand.nextInt(i + 1);
 			Card temp = deck.get(i);
 			deck.set(i, deck.get(j));
-			deck.set(index, temp);
+			deck.set(j, temp);
 		}
 	}
 	
 	public Card deal(){
 		if(index < deck.size()) {
-			Card temp = deck.get(index);
+			Card temp = deck.get(deck.size() - (index + 1));
 			index++;
 			return temp;
 		}

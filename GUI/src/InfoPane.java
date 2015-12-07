@@ -27,7 +27,7 @@ public class InfoPane extends JPanel {
 	private String selectedRoom;
 	private Player human, ai1, ai2;
 	private Deck deck;
-	private Deck discardCard;
+	private Deck discardDeck;
 	private Board board;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
@@ -38,7 +38,6 @@ public class InfoPane extends JPanel {
 	 *
 	 */
 	public InfoPane() {
-		discardCard = new Deck();
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
 		imageButton = new JButton();
@@ -47,6 +46,7 @@ public class InfoPane extends JPanel {
 		ai1 = Model.ai1;
 		ai2 = Model.ai2;
 		deck = Model.deck;
+		discardDeck = Model.discardDeck;
 		board = Model.gameBoard;
 		// listSelectionListener
 		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
@@ -124,7 +124,7 @@ public class InfoPane extends JPanel {
 		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardCard.discardDeckSize());
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
 		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
@@ -328,7 +328,7 @@ public class InfoPane extends JPanel {
 	////////////////// Test Code/////////////////////
 	// update deck count, card discard, and current position
 	public void updateGameInfo() {
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardCard.discardDeckSize());
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
 		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
 	}
 }

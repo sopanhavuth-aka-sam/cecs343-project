@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -35,40 +33,37 @@ public class Card17 extends Card{
 		}
 	}
 		
+	/*@Override
+	public Player play(Player player) {
+		//boolean flag identifying if the play successes or fail
+		boolean result = false;
+		//points and location validation: this determine if the play is successes
+		//or fail
+		if(checkReqPts) {
+			result = validatePts(player);
+		}
+		if(checkReqLoc) {
+			result = validateLoc(player);
+		}
+		//calling win() or fail() method base on "result"
+		if(result) {
+			return win(player);
+		}
+		else {
+			return fail(player);
+		}
+	}*/
 
-	//Win: get 5 Quality points
 	@Override
 	public Player win(Player player) {
 		player.updateQP(5);
+		//lose 1 game card
 		return player;
 	}
 
-	//Fail: lose 3 Quality points; discard a card
 	@Override
 	public Player fail(Player player) {
 		player.updateQP(-3);
-		try {
-			//create arraylist of cardName in the hand; excluding this card
-			ArrayList<String> cardName = new ArrayList<String>();
-			for (int i = 0; i < hand.size(); i++) {
-				if(!name.equals(hand.getCard(i).getName())){
-					cardName.add(hand.getCard(i).getName());
-				}
-			}
-			//convert arraylist of cardName into array Object[]
-			Object[] option = cardName.toArray();
-			String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-					"Choose a card to discard", JOptionPane.PLAIN_MESSAGE, null,
-		            option, option[1]);
-			//remove card(input) from hand
-			for (int i = 0; i < hand.size(); i++) {
-				if(hand.getCard(i).getName().equals(input)) {
-					hand.removeCard(i);
-				}
-			}
-		} catch(NullPointerException e) {
-			System.out.println("AI try to discard card from hand");
-		}
 		return player;
 	}
 
