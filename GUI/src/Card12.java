@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -57,19 +58,23 @@ public class Card12 extends Card {
 	}*/
 
 	@Override
-	//Success: Get 1 learning pt or 1 quality pt
+
 	public Player win(Player player) {
-		//if(player.chooseLearningPts()){
+		Object[] option = {"Learning", "Craft"};
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		if(input.equals("Learning")) {
 			player.updateLearningPts(1);
-		//}
-		/*else if(player.chooseCraftPts()){
+		}
+		else{
 			player.updateCraftPts(1);
-		}*/
+		}
 		return player;
 	}
 
 	@Override
-	//Fail: Nothing happen
+
 	public Player fail(Player player) {
 		return player;
 	}
