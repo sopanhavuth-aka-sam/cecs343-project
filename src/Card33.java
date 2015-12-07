@@ -41,9 +41,13 @@ public class Card33 extends Card{
 	//Win: get 5 QP; get 2 game card
 	public Player win(Player player) {
 		player.updateQP(5);
-		//add draw and add 2 cards to hand
-		hand.addCard(deck.deal());
-		hand.addCard(deck.deal());
+		//add draw and add 2 card to hand
+		try {
+			hand.addCard(deck.deal());
+			hand.addCard(deck.deal());
+		} catch(NullPointerException e) {
+			System.out.println("Ai try to draw card");
+		}
 		return player;
 	}
 

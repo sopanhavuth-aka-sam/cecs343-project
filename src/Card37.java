@@ -61,23 +61,27 @@ public class Card37 extends Card{
 	@Override
 	//Fail: discard 1 game card
 	public Player fail(Player player) {
-		//create arraylist of cardName in the hand; excluding this card
-		ArrayList<String> cardName = new ArrayList<String>();
-		for (int i = 0; i < hand.size(); i++) {
-			if(!name.equals(hand.getCard(i).getName())){
-				cardName.add(hand.getCard(i).getName());
+		try {
+			//create arraylist of cardName in the hand; excluding this card
+			ArrayList<String> cardName = new ArrayList<String>();
+			for (int i = 0; i < hand.size(); i++) {
+				if(!name.equals(hand.getCard(i).getName())){
+					cardName.add(hand.getCard(i).getName());
+				}
 			}
-		}
-		//convert arraylist of cardName into array Object[]
-		Object[] option = cardName.toArray();
-		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
-	            option, option[1]);
-		//remove card(input) from hand
-		for (int i = 0; i < hand.size(); i++) {
-			if(hand.getCard(i).getName().equals(input)) {
-				hand.removeCard(i);
+			//convert arraylist of cardName into array Object[]
+			Object[] option = cardName.toArray();
+			String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+					"Choose a card to discard", JOptionPane.PLAIN_MESSAGE, null,
+		            option, option[1]);
+			//remove card(input) from hand
+			for (int i = 0; i < hand.size(); i++) {
+				if(hand.getCard(i).getName().equals(input)) {
+					hand.removeCard(i);
+				}
 			}
+		} catch(NullPointerException e) {
+			System.out.println("AI try to discard card from hand");
 		}
 		return player;
 	}

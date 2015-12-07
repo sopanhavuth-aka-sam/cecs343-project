@@ -26,7 +26,8 @@ public class InfoPane extends JPanel {
 	private JTextArea areaWS;
 	private String selectedRoom;
 	private Player human, ai1, ai2;
-	private Deck deck = Model.deck;
+	private Deck deck;
+	private Board gameBoard;
 	private Deck discardCard;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
@@ -37,7 +38,11 @@ public class InfoPane extends JPanel {
 	 *
 	 */
 	public InfoPane() {
-		//newDeck = new Deck();
+		deck = Model.deck;
+		gameBoard = Model.gameBoard;
+		
+		
+		
 		discardCard = new Deck();
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
@@ -121,8 +126,9 @@ public class InfoPane extends JPanel {
 		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardCard.discardDeckSize());
-		areaEN.append("\nYou are " + human.getName() + " and you are in " + human.getLoc());
+		updateGameInfo();
+//		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardCard.discardDeckSize());
+//		areaEN.append("\nYou are " + human.getName() + " and you are in " + human.getLoc());
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
 		// East-South
@@ -360,6 +366,7 @@ public class InfoPane extends JPanel {
 	//////////////////Test Code/////////////////////
 	//update deck count, card discard, and current position
 	public void updateGameInfo() {
-		areaEN.setText("new text " + deck.size());
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + deck.getIndex());
+		areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
 	}
 }

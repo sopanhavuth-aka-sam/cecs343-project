@@ -42,18 +42,12 @@ public class Controller {
 
 		//shuffle deck and deal 5 card to player at the start of the game
 		deck.shuffle();
-//		for(int i = 0; i < 5; i++) {
-//			playerHand.addCard(deck.deal());
-//		}
+		for(int i = 0; i < 5; i++) {
+			playerHand.addCard(deck.deal());
+		}
 		playerHand.addCard(new Card13());//add to test teleport
 		playerHand.addCard(new Card8());//add to test discard card
-		playerHand.addCard(new Card25());
-		playerHand.addCard(new Card17());
-		playerHand.addCard(new Card24());
-		playerHand.addCard(new Card27());
-		playerHand.addCard(new Card28());
-		playerHand.addCard(new Card32());
-		playerHand.addCard(new Card37());
+		//playerHand.addCard(new Card25);
 		updatePlayerHand(); //update player hand in infopane
 		
 		//disable move and play button at the start of game
@@ -61,6 +55,7 @@ public class Controller {
 		gameDisplay.togglePlayBtn();
 		
 		updateInfoPanel();
+		gameDisplay.updateGameInfo();
 		updateConnectedRoomList();
 		drawAllTokens();
 		moveBtnListener();
@@ -165,6 +160,8 @@ public class Controller {
 				//update and redraw map
 				clearAllTokens();
 				drawAllTokens();
+				//update basic game info in infoPane
+				gameDisplay.updateGameInfo();
 				//update connected rooms list(JList)
 				updateConnectedRoomList();
 				//check if player can still move this turn
@@ -233,8 +230,6 @@ public class Controller {
 					}
 				}
 				
-//				//remove selected card from hand
-//				playerHand.removeCard(selectedCard);
 				//update current player's hand to InfoPane
 				updatePlayerHand();
 				//IGNORE for now -- optimization.//////////////////
@@ -245,11 +240,14 @@ public class Controller {
 				//////////////////////////testing ai movement////////////////////
 				ai1Action();
 				ai2Action();
+				//update basic game info in infoPane
+				gameDisplay.updateGameInfo();
+				//update the infopane for player detail
+				updateInfoPanel();
 				//update and redraw map (important of "teleport" card)
 				clearAllTokens();
 				drawAllTokens();
-				//update the infopane for player detail
-				updateInfoPanel();
+
 				
 				//control the flow of the game by toggling button
 				gameDisplay.toggleDrawBtn();
@@ -269,6 +267,9 @@ public class Controller {
 	 * 	1. for now we used redundant code for 2 ai. This is done because the 
 	 * 		code need to change ai1 and ai2, we cant pass these 2 as param
 	 *  2. when playing card that require 'hand'. Our ai does not have hand.
+	 *  	(discarding card from hand and deal card to hand);
+	 *  3. program throwing random NullPointerException when ai play card that 
+	 *  	interact with hand or deck.
 	 */
 	//implement ai1 behavior
 	public void ai1Action() {

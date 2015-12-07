@@ -1,11 +1,16 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Deck{
-	
+	/**
+	 * NOTE: The logic of using index a marker between in-play and discarded card
+	 * 			is flaw for this program.
+	 * 		When the deck ran out of card, We was thinking of reseting the index then shuffle.
+	 * 		This result in duplicate cards (a. card in deck and b.card still in hand)
+	 * 		This violate the program requirement where it required reshuffling only the discard cards
+	 * SOLUTION: require fixing --> set this as part of assignment during winter break.
+	 */
 	private ArrayList<Card> deck;
 	private ArrayList<Card> discardDeck;
-	private Random rand;
 	private int index;
 	
 	public Deck(){
@@ -140,6 +145,10 @@ public class Deck{
 		deck.set(card1, deck.get(card2));
 		//replace card 2 data with temp card
 		deck.set(card2, temp);
+	}
+	
+	public int getIndex() {
+		return index;
 	}
 	
 }

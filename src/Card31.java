@@ -38,7 +38,11 @@ public class Card31 extends Card{
 	public Player win(Player player) {
 		player.updateLearningPts(1);
 		//add draw and add 1 card to hand
-		hand.addCard(deck.deal());
+		try {
+			hand.addCard(deck.deal());
+		} catch(NullPointerException e) {
+			System.out.println("Ai try to draw card");
+		}
 		return player;
 	}
 
