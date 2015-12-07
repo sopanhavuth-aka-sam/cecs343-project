@@ -302,11 +302,37 @@ public class InfoPane extends JPanel {
 	}
 	
 	//toggle move button clickable/not
+	/**
+	 * UPDATE: toggle for move button is not enough.
+	 * we need to disable it at the start of the game and after 3 moves.
+	 * using toggles after 3 moves would mess up the control flow of the game.
+	 * the game would be DRAW(enable) MOVE(enable) PLAY(disable) while it should have been
+	 * 					DRAW(enable) MOVE(disable) PLAY(disable)
+	 * SOLUTION: implement disable and enable methods just for move button
+	 */
 	public void toggleMoveBtn() {
 		if(moveBtn.isEnabled()) {
 			moveBtn.setEnabled(false);
 		}
 		else {
+			moveBtn.setEnabled(true);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void disableMoveBtn() {
+		if(moveBtn.isEnabled()) {
+			moveBtn.setEnabled(false);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void enableMoveBtn() {
+		if(!moveBtn.isEnabled()) {
 			moveBtn.setEnabled(true);
 		}
 	}

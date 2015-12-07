@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -23,49 +25,51 @@ public class Card25 extends Card{
 			reqLearningPts = 3;
 			reqCraftPts = 3;
 			reqIntegrityPts = 3;
-			//Play in North (12) or South Hall (13)
+			//Play in North (12) or South Hall (15)
 			checkReqLoc = true;
 			reqLocation.add(12);
-			reqLocation.add(13);
+			reqLocation.add(15);
 			//initialize image
 			try {
-				img = ImageIO.read(new File("img/card27.png"));
+				img = ImageIO.read(new File("img/card25.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
+	//Win: 5 QP, draw 1 game card
 	@Override
 	public Player win(Player player) {
-		player.updateQP(3);
-		//NEED: function to draw one game card.
+		//Get 5 QP
+		player.updateQP(5);
+		//add draw and add 1 card to hand
+		hand.addCard(deck.deal());
+		
 		return player;
 	}
 
 	@Override
 	//Fail: Discard 1 game card from player
 	public Player fail(Player player) {
+		//create arraylist of cardName in the hand; excluding this card
+		ArrayList<String> cardName = new ArrayList<String>();
+		for (int i = 0; i < hand.size(); i++) {
+			if(!name.equals(hand.getCard(i).getName())){
+				cardName.add(hand.getCard(i).getName());
+			}
+		}
+		//convert arraylist of cardName into array Object[]
+		Object[] option = cardName.toArray();
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		//remove card(input) from hand
+		for (int i = 0; i < hand.size(); i++) {
+			if(hand.getCard(i).getName().equals(input)) {
+				hand.removeCard(i);
+			}
+		}
 		return player;
 	}
 

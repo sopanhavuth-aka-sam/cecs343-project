@@ -140,6 +140,15 @@ public class Display extends JFrame {
 		info.toggleMoveBtn();
 	}
 	
+	//disable move button
+	public void disableMoveBtn() {
+		info.disableMoveBtn();
+	}
+	
+	//enable move button
+	public void enableMoveBtn() { 
+		info.enableMoveBtn();
+	}
 	//toggle draw button clickable/not
 	public void toggleDrawBtn() {
 		info.toggleDrawBtn();

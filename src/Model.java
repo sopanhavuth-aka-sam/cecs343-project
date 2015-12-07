@@ -16,8 +16,8 @@ public class Model {
 		gameBoard = new Board();
 		gameDisplay = new Display();
 		human = new Player("Jimmy", 17, 6, 6, 6 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 0, 0, 0, 1, 3);
+		ai1 = new Player("Mary", 17, 6, 6, 6 , 0, 1, 2);
+		ai2 = new Player("Tom", 17, 6, 6, 6, 0, 1, 3);
 		playerHand = new Hand();
 	}
 	

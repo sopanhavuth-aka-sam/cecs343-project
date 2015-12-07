@@ -83,15 +83,6 @@ public abstract class Card {
 			return false;
 		}
 	}
-	/*
-	public boolean discardCard(Player player){
-		if (player.getDiscard() >= discard){
-			return true;
-		}
-		
-		return false;
-	}
-	*/
 	
 	/**
 	 * 
@@ -101,17 +92,34 @@ public abstract class Card {
 	public boolean validateLoc(Player player) {
 		for(int i = 0; i < reqLocation.size(); i++) {
 			if (player.getLoc() == reqLocation.get(i)) {
+				System.out.println("check location");
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Image getImg() {
 		return img;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Integer> getReqLoc() {
+		return reqLocation;
 	}
 }

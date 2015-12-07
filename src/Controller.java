@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * 
@@ -18,22 +19,19 @@ public class Controller {
 	private Player human, ai1, ai2;
 	private Deck deck;
 	private Hand playerHand;
-	//private ArrayList<Card> playerHand = new ArrayList<Card>();
+	private Random rand;
+	private int moveLimit;
 	private static final int TOTAL_ROOM = 21;
-	//private Model model;
 	
 	/**
 	 * 
 	 */
 	public Controller() {
-		Model.init();//initialize model once
-//		gameBoard = new Board();
-//		gameDisplay = new Display();
-//		human = new Player("Jimmy", 17, 6, 6, 6 , 0, 1, 1);
-//		ai1 = new Player("Mary", 17, 0, 0, 0 , 0, 1, 2);
-//		ai2 = new Player("Tom", 17, 0, 0, 0, 0, 1, 3);
-//		deck = new Deck();
-//		playerHand = new Hand();
+		//initialize model once
+		Model.init();
+		rand = new Random();
+		moveLimit = 2;
+
 		gameBoard = Model.gameBoard;
 		gameDisplay = Model.gameDisplay;
 		human = Model.human;
@@ -43,19 +41,25 @@ public class Controller {
 		playerHand = Model.playerHand;
 
 		//shuffle deck and deal 5 card to player at the start of the game
-		//deck.shuffle();//shuffle is broken
-		for(int i = 0; i < 5; i++) {
-			playerHand.addCard(deck.deal());
-		}
+		deck.shuffle();
+//		for(int i = 0; i < 5; i++) {
+//			playerHand.addCard(deck.deal());
+//		}
 		playerHand.addCard(new Card13());//add to test teleport
 		playerHand.addCard(new Card8());//add to test discard card
+		playerHand.addCard(new Card25());
+		playerHand.addCard(new Card17());
+		playerHand.addCard(new Card24());
+		playerHand.addCard(new Card27());
+		playerHand.addCard(new Card28());
+		playerHand.addCard(new Card32());
+		playerHand.addCard(new Card37());
 		updatePlayerHand(); //update player hand in infopane
 		
 		//disable move and play button at the start of game
 		gameDisplay.toggleMoveBtn();
 		gameDisplay.togglePlayBtn();
 		
-		//
 		updateInfoPanel();
 		updateConnectedRoomList();
 		drawAllTokens();
@@ -107,23 +111,38 @@ public class Controller {
 		gameDisplay.updateRoomList(newRoomsStr);
 	}
 	
+	/**
+	 * 
+	 */
 	public void updatePlayerHand() {
 		gameDisplay.updatePlayerHand(playerHand);
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateHuman(){
 		gameDisplay.updateHuman(human);
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateAI1(){
 		gameDisplay.updateAI1(ai1);
 	
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateAI2(){
 		gameDisplay.updateAI2(ai2);
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateInfoPanel(){
 		updateHuman();
 		updateAI1();
@@ -148,6 +167,13 @@ public class Controller {
 				drawAllTokens();
 				//update connected rooms list(JList)
 				updateConnectedRoomList();
+				//check if player can still move this turn
+				if(moveLimit > 0) {
+					moveLimit--;
+				}
+				else {
+					gameDisplay.disableMoveBtn();
+				}
 				
 			}
 			
@@ -165,7 +191,7 @@ public class Controller {
 				//update player hand in infoPane
 				updatePlayerHand();
 				//enable move and play button
-				gameDisplay.toggleMoveBtn();
+				gameDisplay.enableMoveBtn();
 				gameDisplay.togglePlayBtn();
 				//disable draw button
 				gameDisplay.toggleDrawBtn();
@@ -188,6 +214,8 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				
 				System.out.println(human.toString());
+				//reset move limit for player
+				moveLimit = 2;
 				//get selected card index to be played
 				int selectedCard = gameDisplay.getSelectedCard();
 				//get selected card's name
@@ -214,14 +242,20 @@ public class Controller {
 				//		the next card image is display.
 				gameDisplay.resetSelectedCard();
 				gameDisplay.clickImageButton();
+				//////////////////////////testing ai movement////////////////////
+				ai1Action();
+				ai2Action();
 				//update and redraw map (important of "teleport" card)
 				clearAllTokens();
 				drawAllTokens();
 				//update the infopane for player detail
 				updateInfoPanel();
+				
+				//control the flow of the game by toggling button
 				gameDisplay.toggleDrawBtn();
-				gameDisplay.toggleMoveBtn();
+				gameDisplay.disableMoveBtn();
 				gameDisplay.togglePlayBtn();
+				
 				
 				////////////////////Debug///////////////////////////
 				System.out.println(human.toString());
@@ -230,8 +264,76 @@ public class Controller {
 		});
 	}
 	
-	//implement ai behavior
-	public void aiAction() {
+	/**
+	 * ai problem:
+	 * 	1. for now we used redundant code for 2 ai. This is done because the 
+	 * 		code need to change ai1 and ai2, we cant pass these 2 as param
+	 *  2. when playing card that require 'hand'. Our ai does not have hand.
+	 */
+	//implement ai1 behavior
+	public void ai1Action() {
+		/**
+		 * randomize number of move between 0-3
+		 */
+		int movement = rand.nextInt(4);
 		
+		/**
+		 * move in random direction for 'movement'
+		 */
+		for(int i=0; i<movement; i++) {
+			//get current ai's location
+			int currentLoc = ai1.getLoc();
+			//get size of connectedRoom array
+			int size = gameBoard.getConnectedRoom(currentLoc).length;
+			//randomize base on size of connectedRoom for a place to go to
+			int newLoc = gameBoard.getConnectedRoom(currentLoc)[rand.nextInt(size)];
+			//move ai to the new location
+			ai1.setLoc(newLoc);
+		}
+		//search deck for a card to play
+		Card aiCard = deck.deal(ai1.getLoc());
+		
+		/////////////////Debug/////////////////////////
+		System.out.println(ai1.getName());
+		System.out.println(ai1.getLoc());
+		System.out.println(aiCard.getName());
+		System.out.println(aiCard.getReqLoc());
+		////////////////////////////////////////////////
+		
+		ai1 = aiCard.play(ai1);
 	}
+	
+	//implement ai2 behavior
+	public void ai2Action() {
+		/**
+		 * randomize number of move between 0-3
+		 */
+		int movement = rand.nextInt(4);
+		
+		/**
+		 * move in random direction for 'movement'
+		 */
+		for(int i=0; i<movement; i++) {
+			//get current ai's location
+			int currentLoc = ai2.getLoc();
+			//get size of connectedRoom array
+			int size = gameBoard.getConnectedRoom(currentLoc).length;
+			//randomize base on size of connectedRoom for a place to go to
+			int newLoc = gameBoard.getConnectedRoom(currentLoc)[rand.nextInt(size)];
+			//move ai to the new location
+			ai2.setLoc(newLoc);
+		}
+		//search deck for a card to play
+		Card aiCard = deck.deal(ai2.getLoc());
+		
+		/////////////////Debug/////////////////////////
+		System.out.println(ai2.getName());
+		System.out.println(ai2.getLoc());
+		System.out.println(aiCard.getName());
+		System.out.println(aiCard.getReqLoc());
+		////////////////////////////////////////////////
+		
+		ai2 = aiCard.play(ai2);
+	}
+	
 }

@@ -36,7 +36,7 @@ public class Card8 extends Card{
 
 
 	@Override
-	//Success: Get 1 Learning chip; Discard 1 card and get 1 more Learning chip
+	//Win: Get 1 Learning chip; Discard 1 card and get 1 more Learning chip
 	public Player win(Player player) {
 		//add 1 learning chip
 		player.updateLearningPts(1);

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -33,27 +34,8 @@ public class Card27 extends Card{
 			}
 		}
 		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
+	//Win: 5 QP and choose 1 chip
 	@Override
 	public Player win(Player player) {
 		//get 5 qp
@@ -78,6 +60,24 @@ public class Card27 extends Card{
 	@Override
 	//Fail: Discard 1 game card from player
 	public Player fail(Player player) {
+		//create arraylist of cardName in the hand; excluding this card
+		ArrayList<String> cardName = new ArrayList<String>();
+		for (int i = 0; i < hand.size(); i++) {
+			if(!name.equals(hand.getCard(i).getName())){
+				cardName.add(hand.getCard(i).getName());
+			}
+		}
+		//convert arraylist of cardName into array Object[]
+		Object[] option = cardName.toArray();
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		//remove card(input) from hand
+		for (int i = 0; i < hand.size(); i++) {
+			if(hand.getCard(i).getName().equals(input)) {
+				hand.removeCard(i);
+			}
+		}
 		return player;
 	}
 

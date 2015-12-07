@@ -52,10 +52,6 @@ public class Deck{
 		deck.add(new Card39());
 	}
 	
-//	public ArrayList getDeck(){
-//		return deck;
-//	}
-	
 	public void reusedDiscardDeck(){
 		for(int i = 0; i < discardDeck.size(); i++){
 			deck.add(discardDeck.remove(index));
@@ -63,15 +59,18 @@ public class Deck{
 	}
 	
 	public void shuffle(){
-		rand = new Random();
-		for(int i = (deck.size() - 1); i > 0; i--){
-			int j = rand.nextInt(i + 1);
-			Card temp = deck.get(i);
-			deck.set(i, deck.get(j));
-			deck.set(index, temp);
+		for(int i=0; i<deck.size(); i++) {
+			int r = i + (int) (Math.random() * (deck.size() - i));
+			Card temp = deck.get(r);
+			deck.set(r, deck.get(i));
+			deck.set(i, temp);
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Card deal(){
 		if(index < deck.size()) {
 			Card temp = deck.get(index);
@@ -84,14 +83,63 @@ public class Deck{
 		}
 	}
 	
+	/**
+	 * search the whole deck for a card that fit the required location
+	 * @param location
+	 * @return
+	 */
+	public Card deal(int reqLoc) {
+		if(index < deck.size()) {
+			int counter = index; //used counter to move through deck
+								//index is reserved as marker between in-play and discard card
+			//searching the deck
+			while(counter < deck.size()) {
+				//create temp card to return
+				Card temp = deck.get(counter);
+				//store the required location of current card
+				ArrayList<Integer> locArr = temp.getReqLoc();
+				//loop to check if the card has the same required room
+				for(int i=0; i<locArr.size(); i++) {
+					if(locArr.get(i) == reqLoc) {
+						//swap and discard this temp card
+						swap(index, counter);
+						index++;
+						//return temp card to caller
+						return temp;
+					}
+				}
+				//move counter to the next card
+				counter++;
+			}
+			//if no card left in the deck meet the requirement just deal a card normally
+			return this.deal();
+		}
+		else {
+			System.out.println("The deck is empty");
+			return null;
+		}
+	}
+	
 	public int size(){
-		//test code//////////////////////
-		System.out.println(deck.size() - index);
-		
 		return deck.size() - index;
 	}
 	
 	public int discardDeckSize(){
 		return discardDeck.size();
 	}
+	
+	/**
+	 * swap index of 2 cards in the deck
+	 * @param card1
+	 * @param card2
+	 */
+	public void swap(int card1, int card2) {
+		//save card 1 data
+		Card temp = deck.get(card1);
+		//replace card 1 data with card 2
+		deck.set(card1, deck.get(card2));
+		//replace card 2 data with temp card
+		deck.set(card2, temp);
+	}
+	
 }
