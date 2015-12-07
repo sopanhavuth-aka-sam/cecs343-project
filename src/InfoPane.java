@@ -366,7 +366,9 @@ public class InfoPane extends JPanel {
 	//////////////////Test Code/////////////////////
 	//update deck count, card discard, and current position
 	public void updateGameInfo() {
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + deck.getIndex());
+		int totalQP = human.getQP() + ai1.getQP() + ai2.getQP();
+		areaEN.setText("Cards in deck: " + deck.size());
 		areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		areaEN.append("\nTotal Quality Points is " + totalQP);
 	}
 }
