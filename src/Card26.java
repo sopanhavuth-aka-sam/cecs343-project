@@ -34,46 +34,23 @@ public class Card26 extends Card {
 		}
 	}
 
-	/**
-	 * 
-	 */
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
-
 	@Override
+	//Win: get 1 chip of your choose
 	public Player win(Player player) {
 		//choose 1 point
-				Object[] option = {"Learning", "Integrity", "Craft"};
-				String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
-			            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
-			            option, option[1]);
-				if(input.equals("Learning")) {
-					player.updateLearningPts(1);
-				}
-				else if (input.equals("Integrity")) {
-					player.updateIntegrityPts(1);
-				}
-				else { //Craft
-					player.updateCraftPts(1);
-				}
+		Object[] option = {"Learning", "Integrity", "Craft"};
+		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Choose a point", JOptionPane.PLAIN_MESSAGE, null,
+	            option, option[1]);
+		if(input.equals("Learning")) {
+			player.updateLearningPts(1);
+		}
+		else if (input.equals("Integrity")) {
+			player.updateIntegrityPts(1);
+		}
+		else { //Craft
+			player.updateCraftPts(1);
+		}
 		return player;
 	}
 

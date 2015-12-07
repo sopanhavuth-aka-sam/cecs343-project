@@ -37,6 +37,7 @@ public class Card37 extends Card{
 		
 
 	@Override
+	//Win: get 3 QP; Get a chip of your choice
 	public Player win(Player player) {
 		//get 3 qp
 		player.updateQP(3);
@@ -58,6 +59,7 @@ public class Card37 extends Card{
 	}
 
 	@Override
+	//Fail: discard 1 game card
 	public Player fail(Player player) {
 		//create arraylist of cardName in the hand; excluding this card
 		ArrayList<String> cardName = new ArrayList<String>();

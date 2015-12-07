@@ -43,7 +43,7 @@ public class Card17 extends Card{
 		return player;
 	}
 
-	//Fail: lose 3 Quality points
+	//Fail: lose 3 Quality points; discard a card
 	@Override
 	public Player fail(Player player) {
 		player.updateQP(-3);

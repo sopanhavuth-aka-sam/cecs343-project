@@ -44,7 +44,7 @@ public class Card32 extends Card{
 
 
 	@Override
-	//Success: Get 4 quality pts, and a chip of choice
+	//Win: Get 4 quality pts, and a chip of choice
 	public Player win(Player player) {
 		//get 4 qp
 		player.updateQP(4);

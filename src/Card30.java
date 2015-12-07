@@ -38,7 +38,7 @@ public class Card30 extends Card {
 
 
 	@Override
-	//Success: Get 5 quality pts, 1 game card
+	//Win: Get 5 quality pts, 1 game card
 	public Player win(Player player) {
 		//Get 5 QP
 		player.updateQP(5);

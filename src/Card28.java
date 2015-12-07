@@ -37,8 +37,8 @@ public class Card28 extends Card {
 	}
 
 
-	//Win: choose 1 chip
 	@Override
+	//Win: choose 1 chip
 	public Player win(Player player) {
 		//choose 1 point
 		Object[] option = {"Learning", "Integrity", "Craft"};

@@ -18,28 +18,28 @@ import javax.swing.JOptionPane;
 public class Card25 extends Card{
 
 	//constructor
-		public Card25() {
-			name = "Meet the Dean";
-			//Prerequisite: 3 learning, 3 craft, and 3 integrity
-			checkReqPts = true;
-			reqLearningPts = 3;
-			reqCraftPts = 3;
-			reqIntegrityPts = 3;
-			//Play in North (12) or South Hall (15)
-			checkReqLoc = true;
-			reqLocation.add(12);
-			reqLocation.add(15);
-			//initialize image
-			try {
-				img = ImageIO.read(new File("img/card25.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public Card25() {
+		name = "Meet the Dean";
+		//Prerequisite: 3 learning, 3 craft, and 3 integrity
+		checkReqPts = true;
+		reqLearningPts = 3;
+		reqCraftPts = 3;
+		reqIntegrityPts = 3;
+		//Play in North (12) or South Hall (15)
+		checkReqLoc = true;
+		reqLocation.add(12);
+		reqLocation.add(15);
+		//initialize image
+		try {
+			img = ImageIO.read(new File("img/card25.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
 		
 
-	//Win: 5 QP, draw 1 game card
 	@Override
+	//Win: 5 QP, draw 1 game card
 	public Player win(Player player) {
 		//Get 5 QP
 		player.updateQP(5);

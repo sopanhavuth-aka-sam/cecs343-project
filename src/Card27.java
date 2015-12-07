@@ -35,8 +35,8 @@ public class Card27 extends Card{
 		}
 		
 
-	//Win: 5 QP and choose 1 chip
 	@Override
+	//Win: 5 QP and choose 1 chip
 	public Player win(Player player) {
 		//get 5 qp
 		player.updateQP(5);

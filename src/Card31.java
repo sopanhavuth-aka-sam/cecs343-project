@@ -34,6 +34,7 @@ public class Card31 extends Card{
 		
 
 	@Override
+	//Win: get 1 learning chip; get 1 game card
 	public Player win(Player player) {
 		player.updateLearningPts(1);
 		//add draw and add 1 card to hand
