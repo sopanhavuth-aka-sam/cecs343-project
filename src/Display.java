@@ -33,7 +33,6 @@ public class Display extends JFrame {
 
 		
 		//adding ImagePane
-		
 		JScrollPane scrollImage = new JScrollPane(imageP);
 		this.setVisible(true);
 		scrollImage.setPreferredSize(new Dimension((int)(width/1.05),(int)(height/1.5)));

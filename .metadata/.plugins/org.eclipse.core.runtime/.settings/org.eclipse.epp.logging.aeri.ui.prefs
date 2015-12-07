@@ -1,7 +1,7 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=6bfa649d2af762180aa98a85000a4c7abb9a27e2
-action=IGNORE
+action=ASK
 eclipse.preferences.version=1
 problemsZipEtag="dab6e-524f530086fc0"
-rememberSendAction=RESTART
+rememberSendAction=NONE
