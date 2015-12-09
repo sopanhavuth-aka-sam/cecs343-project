@@ -37,35 +37,21 @@ public class Card33 extends Card{
 			}
 		}
 		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
-
 	@Override
+	//Win: get 5 QP; get 2 game card
 	public Player win(Player player) {
 		player.updateQP(5);
-		//get 2 game cards
+		//add draw and add 2 card to hand
+		if(player.isHuman()) {
+			drawCard();
+			drawCard();
+		}
+
 		return player;
 	}
 
 	@Override
+	//Fail: lose 5 QP; go to lactation lounge
 	public Player fail(Player player) {
 		player.updateQP(-5);
 		player.setLoc(20);

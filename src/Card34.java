@@ -38,32 +38,8 @@ public class Card34 extends Card{
 		}
 	}
 
-	/**
-	 * 
-	 */
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
-
 	@Override
-	//Success: Get 5 quality pts
+	//Win: Get 5 quality pts
 	public Player win(Player player) {
 		player.updateQP(5);
 		return player;

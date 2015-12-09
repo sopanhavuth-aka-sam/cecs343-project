@@ -27,8 +27,8 @@ public class InfoPane extends JPanel {
 	private String selectedRoom;
 	private Player human, ai1, ai2;
 	private Deck deck;
-	private Deck discardDeck;
-	private Board board;
+	private Board gameBoard;
+//	private Deck discardCard;
 	private DefaultListModel roomNames;
 	private DefaultTableModel model;
 	private Hand playerHand;
@@ -38,16 +38,16 @@ public class InfoPane extends JPanel {
 	 *
 	 */
 	public InfoPane() {
+		deck = Model.deck;
+		gameBoard = Model.gameBoard;
+		
+		
+		
+//		discardCard = new Deck();
 		roomNames = new DefaultListModel();
 		connectedRoomList = new JList(roomNames);
 		imageButton = new JButton();
 		playerHand = new Hand();
-		human = Model.human;
-		ai1 = Model.ai1;
-		ai2 = Model.ai2;
-		deck = Model.deck;
-		discardDeck = Model.discardDeck;
-		board = Model.gameBoard;
 		// listSelectionListener
 		connectedRoomList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -58,6 +58,10 @@ public class InfoPane extends JPanel {
 				}
 			}
 		});
+		// Dummy value for players
+		human = new Player("", 0, 0, 0, 0, 0, 0, 0, true);
+		ai1 = new Player("", 0, 0, 0, 0, 0, 0, 0, false);
+		ai2 = new Player("", 0, 0, 0, 0, 0, 0, 0, false);
 
 		//////////// test image button////////////
 		imageButton.addActionListener(new ActionListener() {
@@ -124,8 +128,8 @@ public class InfoPane extends JPanel {
 		panelEN.add(table, BorderLayout.WEST);
 
 		areaEN = new JTextArea();
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
-		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
+		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + deck.discardDeckSize());
+		areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
 		panelEN.add(areaEN, BorderLayout.SOUTH);
 
 		// East-South
@@ -136,10 +140,10 @@ public class InfoPane extends JPanel {
 		areaES.setEditable(false);
 		areaES.setLineWrap(true);
 		areaES.setWrapStyleWord(true);
-		areaES.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 2)));
+		areaES.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 3.5)));
 		areaES.setText("Human player is " + human.getName());
 		JScrollPane scroll = new JScrollPane(areaES);
-		scroll.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 2)));
+		scroll.setPreferredSize(new Dimension(eastWidth, (int) (eastHeight / 3.5)));
 		panelES.add(scroll);
 
 		// Center
@@ -196,7 +200,7 @@ public class InfoPane extends JPanel {
 		panelWS.setLayout(new FlowLayout());
 
 		JScrollPane scrollWS = new JScrollPane(connectedRoomList);
-		scrollWS.setPreferredSize(new Dimension(170, 130));
+		scrollWS.setPreferredSize(new Dimension(170, 100));
 		panelWS.add(scrollWS);
 
 	}
@@ -240,7 +244,8 @@ public class InfoPane extends JPanel {
 	}
 
 	public void updateHuman(Player name) {
-		human = name;
+		//human = name;
+		human = Model.human;
 		model.setValueAt(human.getName(), 1, 0);
 		model.setValueAt(human.getLearningPts(), 1, 1);
 		model.setValueAt(human.getCraftPts(), 1, 2);
@@ -249,7 +254,8 @@ public class InfoPane extends JPanel {
 	}
 
 	public void updateAI1(Player name) {
-		ai1 = name;
+		//ai1 = name;
+		ai1 = Model.ai1;
 		model.setValueAt(ai1.getName(), 2, 0);
 		model.setValueAt(ai1.getLearningPts(), 2, 1);
 		model.setValueAt(ai1.getCraftPts(), 2, 2);
@@ -258,13 +264,22 @@ public class InfoPane extends JPanel {
 	}
 
 	public void updateAI2(Player name) {
-		ai2 = name;
+		//ai2 = name;
+		ai2 = Model.ai2;
 		model.setValueAt(ai2.getName(), 3, 0);
 		model.setValueAt(ai2.getLearningPts(), 3, 1);
 		model.setValueAt(ai2.getCraftPts(), 3, 2);
 		model.setValueAt(ai2.getIntegrityPts(), 3, 3);
 		model.setValueAt(ai2.getQP(), 3, 4);
 	}
+
+//	public void updateDeck(Deck deck) {
+//		newDeck = deck;
+//	}
+
+//	public void updateDiscardDeck(Deck deck) {
+//		discardCard = deck;
+//	}
 
 	/**
 	 * add actionListener to "move button"
@@ -297,45 +312,71 @@ public class InfoPane extends JPanel {
 	public void clickImageButton() {
 		imageButton.doClick();
 	}
-
-	// toggle move button clickable/not
+	
+	//toggle move button clickable/not
+	/**
+	 * UPDATE: toggle for move button is not enough.
+	 * we need to disable it at the start of the game and after 3 moves.
+	 * using toggles after 3 moves would mess up the control flow of the game.
+	 * the game would be DRAW(enable) MOVE(enable) PLAY(disable) while it should have been
+	 * 					DRAW(enable) MOVE(disable) PLAY(disable)
+	 * SOLUTION: implement disable and enable methods just for move button
+	 */
 	public void toggleMoveBtn() {
-		if (moveBtn.isEnabled()) {
+		if(moveBtn.isEnabled()) {
 			moveBtn.setEnabled(false);
-		} else {
+		}
+		else {
 			moveBtn.setEnabled(true);
 		}
 	}
-
-	// toggle draw button clickable/not
+	
+	/**
+	 * 
+	 */
+	public void disableMoveBtn() {
+		if(moveBtn.isEnabled()) {
+			moveBtn.setEnabled(false);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void enableMoveBtn() {
+		if(!moveBtn.isEnabled()) {
+			moveBtn.setEnabled(true);
+		}
+	}
+	
+	//toggle draw button clickable/not
 	public void toggleDrawBtn() {
-		if (drawCardBtn.isEnabled()) {
+		if(drawCardBtn.isEnabled()) {
 			drawCardBtn.setEnabled(false);
-		} else {
+		}
+		else {
 			drawCardBtn.setEnabled(true);
 		}
 	}
-
-	// toggle play button clickable/not
+	
+	//toggle play button clickable/not
 	public void togglePlayBtn() {
-		if (playCardBtn.isEnabled()) {
+		if(playCardBtn.isEnabled()) {
 			playCardBtn.setEnabled(false);
-		} else {
+		}
+		else {
 			playCardBtn.setEnabled(true);
 		}
 	}
-
-	////////////////// Test Code/////////////////////
-	// update deck count, card discard, and current position
+	
+	//////////////////Test Code/////////////////////
+	//update deck count, card discard, and current position
 	public void updateGameInfo() {
-
+		deck = Model.deck;
 		int totalQP = human.getQP() + ai1.getQP() + ai2.getQP();
-		//areaEN.setText("Cards in deck: " + deck.size());
-		//areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		areaEN.setText("Cards in deck: " + deck.size());
+		areaEN.append("\nYou are " + human.getName() + " and you are in " + gameBoard.getName(human.getLoc()));
+		areaEN.append("\nPlayer Hand size is " + playerHand.size());
 		areaEN.append("\nTotal Quality Points is " + totalQP);
-
-		areaEN.setText("Cards in deck: " + deck.size() + "\tDiscards out of play: " + discardDeck.discardDeckSize());
-		areaEN.append("\nYou are " + human.getName() + " and you are in " + board.getName(human.getLoc()));
-
 	}
 }

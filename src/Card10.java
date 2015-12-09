@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -40,47 +43,19 @@ public class Card10 extends Card{
 		}
 	}
 
-	/**
-	 * 
-	 */
-//	@Override
-//	public Player play(Player player) {
-//		//boolean for passing Point req and Location req
-//		boolean passPts = false, passLoc = false;
-//		//points and location validation: this determine if the play is successes
-//		//or fail
-//		if(checkReqPts) {
-//			passPts = validatePts(player);
-//		}
-//		else {
-//			passPts = true;
-//		}
-//		if(checkReqLoc) {
-//			passLoc = validateLoc(player);
-//		}
-//		else {
-//			passLoc = true;
-//		}
-//		//calling win() or fail() method base on "result"
-//		if(passPts && passLoc) {
-//			return win(player);
-//		}
-//		else {
-//			return fail(player);
-//		}
-//	}
-
 	@Override
-	//Success: Get 10 quality pts
+	//Win: Get 10 quality pts
 	public Player win(Player player) {
 		player.updateQP(10);
 		return player;
 	}
 
 	@Override
-	//Fail: Lose 1 game card, and leave it in RoR
+	//Fail: Lose 1 game card
 	public Player fail(Player player) {
-		//player.getDiscard(-1);
+		if(player.isHuman()) {
+			discardCard();
+		}
 		return player;
 	}
 	

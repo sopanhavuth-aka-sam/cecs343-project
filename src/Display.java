@@ -33,6 +33,7 @@ public class Display extends JFrame {
 
 		
 		//adding ImagePane
+		
 		JScrollPane scrollImage = new JScrollPane(imageP);
 		this.setVisible(true);
 		scrollImage.setPreferredSize(new Dimension((int)(width/1.05),(int)(height/1.5)));
@@ -139,6 +140,15 @@ public class Display extends JFrame {
 		info.toggleMoveBtn();
 	}
 	
+	//disable move button
+	public void disableMoveBtn() {
+		info.disableMoveBtn();
+	}
+	
+	//enable move button
+	public void enableMoveBtn() { 
+		info.enableMoveBtn();
+	}
 	//toggle draw button clickable/not
 	public void toggleDrawBtn() {
 		info.toggleDrawBtn();

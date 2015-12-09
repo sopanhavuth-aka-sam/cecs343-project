@@ -32,34 +32,16 @@ public class Card29 extends Card{
 			}
 		}
 		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
 	@Override
+	//Win: get 2 craft chips
 	public Player win(Player player) {
 		player.updateCraftPts(2);
 		return player;
 	}
 
 	@Override
+	//Fail: lose 2 QP
 	public Player fail(Player player) {
 		player.updateQP(-2);
 		return player;

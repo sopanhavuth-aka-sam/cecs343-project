@@ -4,23 +4,21 @@ public class Model {
 	public static Board gameBoard;
 	public static Display gameDisplay;
 	public static Player human, ai1, ai2;
-	public static Deck deck;
-	public static Deck discardDeck;
-	public static Hand playerHand;
+	public static Deck deck = new Deck();;
+	public static Hand playerHand = new Hand();;
 	
 	//constructor
 	public Model() {
 	}
 	
 	public static void init() {
-		human = new Player("Jimmy", 17, 2, 2, 2 , 0, 1, 1);
-		ai1 = new Player("Mary", 17, 3, 1, 2 , 0, 1, 2);
-		ai2 = new Player("Tom", 17, 0, 3, 3 , 0, 1, 3);
-		deck = new Deck();
-		discardDeck = new Deck();
+		Deck deck = new Deck();
+		playerHand = new Hand();
 		gameBoard = new Board();
 		gameDisplay = new Display();
-		playerHand = new Hand();
+		human = new Player("Jimmy", 17, 6, 6, 6 , 15, 1, 1, true);
+		ai1 = new Player("Mary", 17, 6, 6, 6 , 15, 1, 2, false);
+		ai2 = new Player("Tom", 17, 6, 6, 6, 15, 1, 3, false);
 	}
 	
 }

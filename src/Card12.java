@@ -33,32 +33,8 @@ public class Card12 extends Card {
 		}
 	}
 
-	/**
-	 * 
-	 */
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
-
 	@Override
-
+	//Win: choose 1 learning or craft chip
 	public Player win(Player player) {
 		Object[] option = {"Learning", "Craft"};
 		String input = (String) JOptionPane.showInputDialog(null, "Choose now...",
@@ -74,7 +50,7 @@ public class Card12 extends Card {
 	}
 
 	@Override
-
+	//Fail: nothing
 	public Player fail(Player player) {
 		return player;
 	}

@@ -10,6 +10,7 @@ public class Player {
 	 */
 	private String name;
 	private int location, QP, learningPts, craftPts, integrityPts, year, drawPos;
+	private boolean isHuman;
 	
 	/**
 	 * 
@@ -21,9 +22,10 @@ public class Player {
 	 * @param integrity
 	 * @param year
 	 * @param drawPos
+	 * @param isHuman
 	 */
 	public Player(String name, int location, int learning, int craft,
-			int integrity, int QP, int year, int drawPos) {
+			int integrity, int QP, int year, int drawPos, boolean isHuman) {
 		this.name = name;
 		this.location = location;
 		this.QP = QP;
@@ -32,6 +34,7 @@ public class Player {
 		this.integrityPts = integrity;
 		this.year = year;
 		this.drawPos = drawPos;
+		this.isHuman = isHuman;
 	}
 	
 	/**
@@ -146,6 +149,13 @@ public class Player {
 		this.year = newYear;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isHuman() {
+		return isHuman;
+	}
 	/**
 	 * 
 	 */

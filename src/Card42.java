@@ -38,10 +38,8 @@ public class Card42 extends Card{
 	public Player win(Player player) {
 		player.updateQP(5);
 		//add draw and add 1 card to hand
-		try {
-		    hand.addCard(deck.deal());
-		} catch(NullPointerException e) {
-		    System.out.println("Ai try to draw card");
+		if(player.isHuman()) {
+			drawCard();
 		}
 		return player;
 	}

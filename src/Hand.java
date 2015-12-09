@@ -2,11 +2,9 @@ import java.util.ArrayList;
 
 public class Hand {
 	
-	private ArrayList<Card> hand;
-	private int size;
+	private ArrayList<Card> hand = new ArrayList<Card>();
 	
 	public Hand(){
-		hand = new ArrayList<Card>();
 	}
 	
 	public void addCard(Card newCard){

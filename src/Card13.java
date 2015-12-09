@@ -32,29 +32,9 @@ public class Card13 extends Card{
 				e.printStackTrace();
 			}
 		}
-		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
 	@Override
+	//Win: get 1 craft chip and move to lactation lounge(20)
 	public Player win(Player player) {
 		player.updateCraftPts(1);
 		player.setLoc(20);

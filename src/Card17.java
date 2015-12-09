@@ -1,7 +1,9 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  * Card Description: 
@@ -33,37 +35,21 @@ public class Card17 extends Card{
 		}
 	}
 		
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
+	//Win: get 5 Quality points
 	@Override
 	public Player win(Player player) {
 		player.updateQP(5);
-		//lose 1 game card
 		return player;
 	}
 
+	//Fail: lose 3 Quality points; discard a card
 	@Override
 	public Player fail(Player player) {
 		player.updateQP(-3);
+		if(player.isHuman()) {
+			discardCard();
+		}
 		return player;
 	}
 

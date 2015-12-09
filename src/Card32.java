@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -40,32 +42,9 @@ public class Card32 extends Card{
 		}
 	}
 
-	/**
-	 * 
-	 */
-	/*@Override
-	public Player play(Player player) {
-		//boolean flag identifying if the play successes or fail
-		boolean result = false;
-		//points and location validation: this determine if the play is successes
-		//or fail
-		if(checkReqPts) {
-			result = validatePts(player);
-		}
-		if(checkReqLoc) {
-			result = validateLoc(player);
-		}
-		//calling win() or fail() method base on "result"
-		if(result) {
-			return win(player);
-		}
-		else {
-			return fail(player);
-		}
-	}*/
 
 	@Override
-	//Success: Get 4 quality pts, and a chip of choice
+	//Win: Get 4 quality pts, and a chip of choice
 	public Player win(Player player) {
 		//get 4 qp
 		player.updateQP(4);
@@ -89,7 +68,9 @@ public class Card32 extends Card{
 	@Override
 	//Fail: Discard 1 game card
 	public Player fail(Player player) {
-		//player.updateGameCard(-1);
+		if(player.isHuman()) {
+			discardCard();
+		}
 		return player;
 	}
 	
